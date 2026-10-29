@@ -1,0 +1,17 @@
+# Compiled programs and build files
+build/
+*.o
+*.out
+*.exe
+*.a
+*.so
+
+# Python temporary files
+__pycache__/
+*.pyc
+
+# Editor and operating system files
+.vscode/
+.DS_Store
+
+# Keep experiment source code and result logs
