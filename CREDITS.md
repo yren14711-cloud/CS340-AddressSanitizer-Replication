@@ -40,12 +40,8 @@ that disclosure must stay consistent with the AI usage statement in the report.
 ## License
 
 The original code in this repository (benchmarks, scripts, Makefile, report
-sources) is the work of the group members.
-
-> **TODO (group decision, required by the rubric):** choose a license for the
-> group's own code, add a `LICENSE` file at the repository root, and repeat the
-> license name here. Until that file exists the repository is "all rights
-> reserved", which is not what the rubric asks for.
+sources) is the work of the group members and is released under the **MIT
+License**. The full text is in the `LICENSE` file at the repository root.
 
 Third-party components keep their own licenses: Clang and compiler-rt are
 Apache-2.0 WITH LLVM-exception, and they are used as an installed toolchain
