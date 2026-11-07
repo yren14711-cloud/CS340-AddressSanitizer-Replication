@@ -1,0 +1,46 @@
+### asan build: experiments/memory_errors/global_buffer_overflow.c
+### command: ASAN_OPTIONS=detect_leaks=0 build/detect_global_buffer_overflow_asan
+=================================================================
+==2565==ERROR: AddressSanitizer: global-buffer-overflow on address 0x6083a71a7b70 at pc 0x6083a6816b52 bp 0x7fff27a54f60 sp 0x7fff27a54f58
+WRITE of size 4 at 0x6083a71a7b70 thread T0
+==2565==WARNING: invalid path to external symbolizer!
+==2565==WARNING: Failed to use and restart external symbolizer!
+    #0 0x6083a6816b51  (/mnt/d/Java/IdeaProjects/CS340-AddressSanitizer-Replication/build/detect_global_buffer_overflow_asan+0x115b51) (BuildId: e02cf49f26b61632a72924ad96f28c0e0673bfb1)
+    #1 0x7c616582a600  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a600) (BuildId: 066527e430a32768d82741e00b81eebb1a872294)
+    #2 0x7c616582a717  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a717) (BuildId: 066527e430a32768d82741e00b81eebb1a872294)
+    #3 0x6083a672d364  (/mnt/d/Java/IdeaProjects/CS340-AddressSanitizer-Replication/build/detect_global_buffer_overflow_asan+0x2c364) (BuildId: e02cf49f26b61632a72924ad96f28c0e0673bfb1)
+
+0x6083a71a7b70 is located 0 bytes after global variable 'counters' defined in 'experiments/memory_errors/global_buffer_overflow.c' (0x6083a71a7b60) of size 16
+SUMMARY: AddressSanitizer: global-buffer-overflow (/mnt/d/Java/IdeaProjects/CS340-AddressSanitizer-Replication/build/detect_global_buffer_overflow_asan+0x115b51) (BuildId: e02cf49f26b61632a72924ad96f28c0e0673bfb1) 
+Shadow bytes around the buggy address:
+  0x6083a71a7880: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x6083a71a7900: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x6083a71a7980: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x6083a71a7a00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x6083a71a7a80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x6083a71a7b00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00[f9]f9
+  0x6083a71a7b80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x6083a71a7c00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x6083a71a7c80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x6083a71a7d00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x6083a71a7d80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==2565==ABORTING
