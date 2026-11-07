@@ -1,0 +1,71 @@
+=== CS340 AddressSanitizer replication: environment record ===
+recorded_utc: 2026-11-07T06:18:46Z
+
+=== Operating system ===
+PRETTY_NAME="Ubuntu 26.04.1 LTS"
+VERSION_ID="26.04"
+ID=ubuntu
+kernel_release: 6.18.54.1-microsoft-standard-WSL2
+uname: Linux DESKTOP-44SLN98 6.18.54.1-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Tue Oct  6 19:13:07 UTC 2026 x86_64 GNU/Linux
+
+=== Hardware ===
+architecture: x86_64
+nproc: 20
+CPU(s):                                  20
+Vendor ID:                               GenuineIntel
+Model name:                              13th Gen Intel(R) Core(TM) i7-13650HX
+Thread(s) per core:                      2
+Core(s) per socket:                      10
+Socket(s):                               1
+L2 cache:                                12.5 MiB (10 instances)
+L3 cache:                                24 MiB (1 instance)
+MemTotal:        7970696 kB
+MemAvailable:    7384144 kB
+SwapTotal:       2097152 kB
+virtualisation: wsl
+note_wsl: running under WSL
+
+=== Compilers and tools ===
+clang: not found
+make: not found
+python3: Python 3.14.4
+git: git version 2.53.0
+taskset: taskset from util-linux 2.41.3
+
+=== AddressSanitizer configuration used for asan runs ===
+ASAN_OPTIONS=quarantine_size_mb=0:malloc_context_size=0:detect_leaks=0:redzone=32
+compile_flags=-fsanitize=address -fno-omit-frame-pointer (overridable with make ASAN=...)
+optimisation=-O2 for both base and asan binaries
+
+=== Repository state ===
+HEAD=6f9ea3a27648aca08efdd9c30312592416e4d313
+describe=6f9ea3a-dirty
+branch=main
+local_changes:
+ M .dockerignore
+ M .gitignore
+ M CREDITS.md
+ M Dockerfile
+ M Makefile
+ M README.md
+ M benchmarks/README.md
+ M benchmarks/b1_malloc_text.c
+ M benchmarks/b2_pointer_chase.c
+ M benchmarks/b3_matmul.c
+ M benchmarks/b4_string_scan.c
+ M docs/AI_USAGE.md
+ M docs/CLAIMS.md
+ M docs/DETECTION.md
+ M docs/DEVIATIONS.md
+ M experiments/memory_errors/global_buffer_overflow.c
+ M experiments/memory_errors/heap_buffer_overflow.c
+ M experiments/memory_errors/stack_buffer_overflow.c
+ M experiments/memory_errors/use_after_free.c
+ M results/asan/environment.txt
+ M results/asan/heap_buffer_overflow_run1.log
+ M scripts/collect_env.sh
+ M scripts/parse_results.py
+ M scripts/run_detection.sh
+ M scripts/run_experiments.sh
+?? .idea/
+?? results/env/

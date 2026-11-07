@@ -1,10 +1,10 @@
 CS340 AddressSanitizer Replication
-Experiment: Heap Buffer Overflow Detection
-Date (UTC): Thu Oct 29 01:14:01 PM UTC 2026
+Experiment: Environment Information Collection
+Date (UTC): Sat Nov  7 06:24:42 UTC 2026
 Environment: Ubuntu on Windows WSL2
 
 === Operating System ===
-PRETTY_NAME="Ubuntu 26.04 LTS"
+PRETTY_NAME="Ubuntu 26.04.1 LTS"
 
 === Linux Kernel ===
 6.18.54.1-microsoft-standard-WSL2
@@ -12,14 +12,10 @@ PRETTY_NAME="Ubuntu 26.04 LTS"
 === Architecture ===
 x86_64
 
-=== Clang Version ===
-Ubuntu clang version 21.1.8 (6ubuntu1)
-Target: x86_64-pc-linux-gnu
-Thread model: posix
-InstalledDir: /usr/lib/llvm-21/bin
+=== Compiler Version ===
 
 === Git Version ===
 git version 2.53.0
 
 === Starting Git Commit ===
-e1e06f890e8b81c3541f33f8045e05ebc32c51ec
+6f9ea3a27648aca08efdd9c30312592416e4d313
