@@ -1,0 +1,27 @@
+AddressSanitizer Performance Analysis
+Workload: array_update
+Total runs: 30
+Unique checksum: 36028792044519424
+Standard deviation: Sample SD
+
+===== Batch 1 =====
+NATIVE: Mean=1.100852s, SD=0.238787s, CV=21.69%
+ASAN: Mean=1.480847s, SD=0.168804s, CV=11.40%
+Overhead=34.52%
+
+===== Batch 2 =====
+NATIVE: Mean=0.654080s, SD=0.037825s, CV=5.78%
+ASAN: Mean=0.845528s, SD=0.043863s, CV=5.19%
+Overhead=29.27%
+
+===== Batch 3 =====
+NATIVE: Mean=0.673869s, SD=0.013495s, CV=2.00%
+ASAN: Mean=0.859979s, SD=0.037713s, CV=4.39%
+Overhead=27.62%
+
+===== ALL 15 RUNS PER GROUP =====
+NATIVE: Mean=0.809600s, SD=0.249530s, CV=30.82%
+ASAN: Mean=1.062118s, SD=0.321035s, CV=30.23%
+Overall Overhead=31.19%
+
+Note: Overall SD includes between-batch variation. Batch-specific results should also be reported.

@@ -1,0 +1,81 @@
+AddressSanitizer Performance Benchmark
+Date (UTC): Mon Nov  9 12:02:09 PM UTC 2026
+Compiler: Ubuntu clang version 21.1.8 (6ubuntu1)
+Native and ASan versions
+Formal runs: 5 per version
+
+========== PAIR 1 ==========
+--- NATIVE RUN 1 ---
+workload=array_update
+elements=16777216
+passes=200
+array_size_bytes=67108864
+elapsed_seconds=0.991951651
+checksum=36028792044519424
+--- ASAN RUN 1 ---
+workload=array_update
+elements=16777216
+passes=200
+array_size_bytes=67108864
+elapsed_seconds=1.352202477
+checksum=36028792044519424
+========== PAIR 2 ==========
+--- ASAN RUN 2 ---
+workload=array_update
+elements=16777216
+passes=200
+array_size_bytes=67108864
+elapsed_seconds=1.299589418
+checksum=36028792044519424
+--- NATIVE RUN 2 ---
+workload=array_update
+elements=16777216
+passes=200
+array_size_bytes=67108864
+elapsed_seconds=0.917999743
+checksum=36028792044519424
+========== PAIR 3 ==========
+--- NATIVE RUN 3 ---
+workload=array_update
+elements=16777216
+passes=200
+array_size_bytes=67108864
+elapsed_seconds=0.901842223
+checksum=36028792044519424
+--- ASAN RUN 3 ---
+workload=array_update
+elements=16777216
+passes=200
+array_size_bytes=67108864
+elapsed_seconds=1.678201272
+checksum=36028792044519424
+========== PAIR 4 ==========
+--- ASAN RUN 4 ---
+workload=array_update
+elements=16777216
+passes=200
+array_size_bytes=67108864
+elapsed_seconds=1.438906462
+checksum=36028792044519424
+--- NATIVE RUN 4 ---
+workload=array_update
+elements=16777216
+passes=200
+array_size_bytes=67108864
+elapsed_seconds=1.452897700
+checksum=36028792044519424
+========== PAIR 5 ==========
+--- NATIVE RUN 5 ---
+workload=array_update
+elements=16777216
+passes=200
+array_size_bytes=67108864
+elapsed_seconds=1.239568240
+checksum=36028792044519424
+--- ASAN RUN 5 ---
+workload=array_update
+elements=16777216
+passes=200
+array_size_bytes=67108864
+elapsed_seconds=1.635337746
+checksum=36028792044519424

@@ -74,3 +74,57 @@ We plan to investigate how different workload sizes influence the performance ov
 
 1. Serebryany, K., Bruening, D., Potapenko, A., and Vyukov, D. (2012). *AddressSanitizer: A Fast Address Sanity Checker*. USENIX Annual Technical Conference.
 2. LLVM AddressSanitizer Documentation: https://clang.llvm.org/docs/AddressSanitizer.html
+
+
+## 8. Week 2: Performance Overhead Experiment
+
+### Objective
+Measure the execution-time overhead introduced by AddressSanitizer using a custom array-update benchmark.
+
+### Environment
+- CPU: AMD Ryzen 7 8845H
+- OS: Ubuntu on WSL2
+- Kernel: 6.18.54.1-microsoft-standard-WSL2
+- Compiler: Clang 21.1.8
+- WSL-visible memory: 7.4 GiB
+
+### Benchmark Configuration
+- Array size: 64 MiB (16,777,216 integers)
+- Update passes: 200
+- Compilation optimization: -O2
+- Timing method: CLOCK_MONOTONIC
+- Two versions: Native and ASan
+
+### Experimental Procedure
+Three batches were conducted, each containing five Native runs and five ASan runs. The execution order was alternated between the two versions. All 30 executions produced identical checksums.
+
+### Results
+
+| Batch | Native Mean (s) | Native SD (s) | ASan Mean (s) | ASan SD (s) | Overhead |
+|---|---:|---:|---:|---:|---:|
+| 1 | 1.100852 | 0.238787 | 1.480847 | 0.168804 | 34.52% |
+| 2 | 0.654080 | 0.037825 | 0.845528 | 0.043863 | 29.27% |
+| 3 | 0.673869 | 0.013495 | 0.859979 | 0.037713 | 27.62% |
+
+
+**Performance Comparison**
+
+Error bars represent ±1 sample standard deviation (n = 5 per version per batch).
+
+![Native vs. AddressSanitizer Performance](results/performance/performance_comparison.png)
+
+
+Across all 15 runs per version, the overall execution-time overhead was 31.19%.
+
+### Limitations
+Batch 1 exhibited greater timing variability than Batches 2 and 3. The source of this variation has not been established. The overall result includes between-batch variation.
+
+Our benchmark differs from the SPEC CPU2006 workloads used in the original paper. Therefore, this experiment provides a reduced-scale performance investigation rather than a direct reproduction of the paper's 73% average overhead.
+
+### Reproduction Files
+- Source: experiments/performance/array_update_benchmark.c
+- Execution scripts: experiments/performance/run_benchmark.sh and run_benchmark_batch2.sh and run_benchmark_batch3.sh
+- Analysis script: experiments/performance/analyze_benchmarks.py
+- Logs: results/performance/benchmark_runs_batch1.log, benchmark_runs_batch2.log, benchmark_runs_batch3.log
+- Data: results/performance/benchmark_summary.csv
+- Statistics: results/performance/performance_analysis.txt
