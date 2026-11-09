@@ -1,0 +1,4 @@
+### plain build: experiments/memory_errors/use_after_free.c
+### command: build/detect_use_after_free_plain
+before free: AAAAAAAAAAAAAAA
+after free: first byte is 66

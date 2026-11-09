@@ -1,0 +1,5 @@
+### plain build: experiments/memory_errors/heap_buffer_overflow.c
+### command: build/detect_heap_buffer_overflow_plain
+Allocated 5 integers; valid indices are 0 through 4.
+Intentionally reading numbers[5] to test AddressSanitizer.
+Unexpected value: 0

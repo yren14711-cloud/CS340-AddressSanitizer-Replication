@@ -1,0 +1,3 @@
+### plain build: experiments/memory_errors/stack_buffer_overflow.c
+### command: build/detect_stack_buffer_overflow_plain
+wrote buffer[4] (valid indices 0..3), observed=0
