@@ -37,12 +37,12 @@ The scripts in `scripts/` and the build in `Makefile` were written for this
 replication. See `docs/AI_USAGE.md` for the disclosure of AI-assisted drafting;
 that disclosure must stay consistent with the AI usage statement in the report.
 
-## License
+## LICENSE
 
 The original code in this repository (benchmarks, scripts, Makefile, report
 sources) is the work of the group members and is released under the **MIT
-License**. The full text is in the `LICENSE` file at the repository root.
+LICENSE**. The full text is in the `LICENSE` file at the repository root.
 
-Third-party components keep their own licenses: Clang and compiler-rt are
+Third-party components keep their own LICENSE: Clang and compiler-rt are
 Apache-2.0 WITH LLVM-exception, and they are used as an installed toolchain
 rather than copied into this repository.
