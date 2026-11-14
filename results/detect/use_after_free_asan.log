@@ -1,43 +1,43 @@
 ### asan build: experiments/memory_errors/use_after_free.c
 ### command: ASAN_OPTIONS=detect_leaks=0 build/detect_use_after_free_asan
 =================================================================
-==2607==ERROR: AddressSanitizer: heap-use-after-free on address 0x7498f4be0010 at pc 0x555f2bda8ba0 bp 0x7ffe373b8380 sp 0x7ffe373b8378
-WRITE of size 1 at 0x7498f4be0010 thread T0
-==2607==WARNING: invalid path to external symbolizer!
-==2607==WARNING: Failed to use and restart external symbolizer!
-    #0 0x555f2bda8b9f  (/mnt/d/Java/IdeaProjects/CS340-AddressSanitizer-Replication/build/detect_use_after_free_asan+0x115b9f) (BuildId: e1dcd04fa7829d74a53de02bd19b8373bb6f726f)
-    #1 0x7878f5a2a600  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a600) (BuildId: 066527e430a32768d82741e00b81eebb1a872294)
-    #2 0x7878f5a2a717  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a717) (BuildId: 066527e430a32768d82741e00b81eebb1a872294)
-    #3 0x555f2bcbf364  (/mnt/d/Java/IdeaProjects/CS340-AddressSanitizer-Replication/build/detect_use_after_free_asan+0x2c364) (BuildId: e1dcd04fa7829d74a53de02bd19b8373bb6f726f)
+==911==ERROR: AddressSanitizer: heap-use-after-free on address 0x6da6545e0010 at pc 0x58b1c0feaba0 bp 0x7ffc78410730 sp 0x7ffc78410728
+WRITE of size 1 at 0x6da6545e0010 thread T0
+==911==WARNING: invalid path to external symbolizer!
+==911==WARNING: Failed to use and restart external symbolizer!
+    #0 0x58b1c0feab9f  (/mnt/d/Java/IdeaProjects/CS340-AddressSanitizer-Replication/build/detect_use_after_free_asan+0x115b9f) (BuildId: e1dcd04fa7829d74a53de02bd19b8373bb6f726f)
+    #1 0x71865542a600  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a600) (BuildId: 066527e430a32768d82741e00b81eebb1a872294)
+    #2 0x71865542a717  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a717) (BuildId: 066527e430a32768d82741e00b81eebb1a872294)
+    #3 0x58b1c0f01364  (/mnt/d/Java/IdeaProjects/CS340-AddressSanitizer-Replication/build/detect_use_after_free_asan+0x2c364) (BuildId: e1dcd04fa7829d74a53de02bd19b8373bb6f726f)
 
-0x7498f4be0010 is located 0 bytes inside of 16-byte region [0x7498f4be0010,0x7498f4be0020)
+0x6da6545e0010 is located 0 bytes inside of 16-byte region [0x6da6545e0010,0x6da6545e0020)
 freed by thread T0 here:
-    #0 0x555f2bd6466a  (/mnt/d/Java/IdeaProjects/CS340-AddressSanitizer-Replication/build/detect_use_after_free_asan+0xd166a) (BuildId: e1dcd04fa7829d74a53de02bd19b8373bb6f726f)
-    #1 0x555f2bda8b14  (/mnt/d/Java/IdeaProjects/CS340-AddressSanitizer-Replication/build/detect_use_after_free_asan+0x115b14) (BuildId: e1dcd04fa7829d74a53de02bd19b8373bb6f726f)
-    #2 0x7878f5a2a600  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a600) (BuildId: 066527e430a32768d82741e00b81eebb1a872294)
-    #3 0x7878f5a2a717  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a717) (BuildId: 066527e430a32768d82741e00b81eebb1a872294)
-    #4 0x555f2bcbf364  (/mnt/d/Java/IdeaProjects/CS340-AddressSanitizer-Replication/build/detect_use_after_free_asan+0x2c364) (BuildId: e1dcd04fa7829d74a53de02bd19b8373bb6f726f)
+    #0 0x58b1c0fa666a  (/mnt/d/Java/IdeaProjects/CS340-AddressSanitizer-Replication/build/detect_use_after_free_asan+0xd166a) (BuildId: e1dcd04fa7829d74a53de02bd19b8373bb6f726f)
+    #1 0x58b1c0feab14  (/mnt/d/Java/IdeaProjects/CS340-AddressSanitizer-Replication/build/detect_use_after_free_asan+0x115b14) (BuildId: e1dcd04fa7829d74a53de02bd19b8373bb6f726f)
+    #2 0x71865542a600  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a600) (BuildId: 066527e430a32768d82741e00b81eebb1a872294)
+    #3 0x71865542a717  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a717) (BuildId: 066527e430a32768d82741e00b81eebb1a872294)
+    #4 0x58b1c0f01364  (/mnt/d/Java/IdeaProjects/CS340-AddressSanitizer-Replication/build/detect_use_after_free_asan+0x2c364) (BuildId: e1dcd04fa7829d74a53de02bd19b8373bb6f726f)
 
 previously allocated by thread T0 here:
-    #0 0x555f2bd64908  (/mnt/d/Java/IdeaProjects/CS340-AddressSanitizer-Replication/build/detect_use_after_free_asan+0xd1908) (BuildId: e1dcd04fa7829d74a53de02bd19b8373bb6f726f)
-    #1 0x555f2bda8ac0  (/mnt/d/Java/IdeaProjects/CS340-AddressSanitizer-Replication/build/detect_use_after_free_asan+0x115ac0) (BuildId: e1dcd04fa7829d74a53de02bd19b8373bb6f726f)
-    #2 0x7878f5a2a600  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a600) (BuildId: 066527e430a32768d82741e00b81eebb1a872294)
-    #3 0x7878f5a2a717  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a717) (BuildId: 066527e430a32768d82741e00b81eebb1a872294)
-    #4 0x555f2bcbf364  (/mnt/d/Java/IdeaProjects/CS340-AddressSanitizer-Replication/build/detect_use_after_free_asan+0x2c364) (BuildId: e1dcd04fa7829d74a53de02bd19b8373bb6f726f)
+    #0 0x58b1c0fa6908  (/mnt/d/Java/IdeaProjects/CS340-AddressSanitizer-Replication/build/detect_use_after_free_asan+0xd1908) (BuildId: e1dcd04fa7829d74a53de02bd19b8373bb6f726f)
+    #1 0x58b1c0feaac0  (/mnt/d/Java/IdeaProjects/CS340-AddressSanitizer-Replication/build/detect_use_after_free_asan+0x115ac0) (BuildId: e1dcd04fa7829d74a53de02bd19b8373bb6f726f)
+    #2 0x71865542a600  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a600) (BuildId: 066527e430a32768d82741e00b81eebb1a872294)
+    #3 0x71865542a717  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a717) (BuildId: 066527e430a32768d82741e00b81eebb1a872294)
+    #4 0x58b1c0f01364  (/mnt/d/Java/IdeaProjects/CS340-AddressSanitizer-Replication/build/detect_use_after_free_asan+0x2c364) (BuildId: e1dcd04fa7829d74a53de02bd19b8373bb6f726f)
 
 SUMMARY: AddressSanitizer: heap-use-after-free (/mnt/d/Java/IdeaProjects/CS340-AddressSanitizer-Replication/build/detect_use_after_free_asan+0x115b9f) (BuildId: e1dcd04fa7829d74a53de02bd19b8373bb6f726f) 
 Shadow bytes around the buggy address:
-  0x7498f4bdfd80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  0x7498f4bdfe00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  0x7498f4bdfe80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  0x7498f4bdff00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  0x7498f4bdff80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-=>0x7498f4be0000: fa fa[fd]fd fa fa fa fa fa fa fa fa fa fa fa fa
-  0x7498f4be0080: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
-  0x7498f4be0100: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
-  0x7498f4be0180: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
-  0x7498f4be0200: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
-  0x7498f4be0280: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x6da6545dfd80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x6da6545dfe00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x6da6545dfe80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x6da6545dff00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x6da6545dff80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x6da6545e0000: fa fa[fd]fd fa fa fa fa fa fa fa fa fa fa fa fa
+  0x6da6545e0080: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x6da6545e0100: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x6da6545e0180: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x6da6545e0200: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x6da6545e0280: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
 Shadow byte legend (one shadow byte represents 8 application bytes):
   Addressable:           00
   Partially addressable: 01 02 03 04 05 06 07 
@@ -57,4 +57,4 @@ Shadow byte legend (one shadow byte represents 8 application bytes):
   ASan internal:           fe
   Left alloca redzone:     ca
   Right alloca redzone:    cb
-==2607==ABORTING
+==911==ABORTING

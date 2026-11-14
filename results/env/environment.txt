@@ -26,8 +26,8 @@ virtualisation: wsl
 note_wsl: running under WSL
 
 === Compilers and tools ===
-clang: not found
-make: not found
+clang: /usr/bin/clang (version 21.1.8)
+make: /usr/bin/make (version 4.4.1)
 python3: Python 3.14.4
 git: git version 2.53.0
 taskset: taskset from util-linux 2.41.3

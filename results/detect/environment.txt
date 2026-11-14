@@ -1,8 +1,8 @@
 === CS340 AddressSanitizer replication: detection environment ===
-recorded_utc: 2026-11-07T06:37:22Z
-host: Linux 6.18.54.1-microsoft-standard-WSL2 x86_64
+recorded_utc: 2026-11-14T07:45:48Z
+host: Linux 6.18.58.1-microsoft-standard-WSL2 x86_64
 compiler: Ubuntu clang version 21.1.8 (6ubuntu1)
 compile_flags_plain: -O1 -Wall -Wextra
 compile_flags_asan: -O1 -Wall -Wextra -fsanitize=address -fno-omit-frame-pointer -g
 ASAN_OPTIONS=detect_leaks=0 (default quarantine, unlike the overhead runs)
-git_HEAD=6f9ea3a27648aca08efdd9c30312592416e4d313
+git_HEAD=b0bd2905f4c775357e080dfe149676ae34d0cc6e
