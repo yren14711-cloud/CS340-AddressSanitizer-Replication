@@ -65,7 +65,7 @@ We plan to investigate how different workload sizes influence the performance ov
 - [x] GitHub repository created.
 - [x] Experimental environment configured.
 - [x] Memory error detection experiments completed.
-- [x] Performance experiments completed (runtime: `results/performance/`; memory overhead for Claim 2 in progress).
+- [x] Performance experiments completed (runtime: `results/performance/`; memory overhead: `results/logs/20261114T155152Z/runs.log`).
 - [ ] Results analyzed and visualized.
 - [ ] Extension experiment completed.
 - [ ] Final report and presentation completed.

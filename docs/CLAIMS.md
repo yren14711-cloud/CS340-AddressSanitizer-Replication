@@ -76,8 +76,9 @@ Paper: *AddressSanitizer: A Fast Address Sanity Checker*, USENIX ATC 2012.
   `heap-buffer-overflow`, `stack-buffer-overflow`, `global-buffer-overflow`,
   and `heap-use-after-free` (see `experiments/memory_errors/`). All four match
   the expected class in `results/detect/summary.md` (`Matches expected = yes`).
-  A false-positive check on clean programs is being added under
-  `results/detect/false_positive/` this week.
+  The false-positive check on clean programs has not been run yet: there is no
+  `results/detect/false_positive/` directory in this repository, and the verdict
+  stays "partially supported" until one exists.
 - Produced by: `scripts/run_detection.sh` (covers all four cases). Note that
   `make detect` currently builds only the heap case from `DETECT_SRC`.
 
