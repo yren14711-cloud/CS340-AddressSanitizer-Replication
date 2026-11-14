@@ -26,6 +26,8 @@ the setting shown; **TODO** = still needs a value.
 | 14 | Inputs / workload size | SPEC reference inputs[cite: 1] | `scale=1` default, one scale axis used in the extension experiment[cite: 1] | Keeps total matrix runtime in the minutes range on a laptop[cite: 1] | Smaller inputs are more cache-friendly, which can understate the instrumented slowdown[cite: 1] | done |
 | 15 | Detection experiments | Reports on real Chromium bugs[cite: 1] | Small hand-written programs covering global, heap, stack overflows and use-after-free, verified in `results/detect/`[cite: 1] | Reproducing Chromium is out of scope for a course project[cite: 1] | Demonstrates the mechanism, not the paper's bug-finding record[cite: 1] | done |
 
+| 16 | Additional runtime workload (`array_update`) | SPEC CPU2006 C/C++ binaries, reference inputs | Custom `array_update` microbenchmark: 64 MiB array (16,777,216 ints), 200 update passes, `-O2`, CLOCK_MONOTONIC; Native vs ASan; 3 batches × 5 runs/version | SPEC cannot be redistributed; measured as a controlled open workload for Claim 1 | Overall overhead is 31.19% vs the paper's 73% average on SPEC (Fig. 2). Different workload — not directly equivalent. Batches: 34.52%, 29.27%, 27.62%. | done; see `results/performance/` and README section 8 |
+
 ## How to update this file
 
 - Change a `TODO` to a concrete value as soon as the experiment runs, in the same
