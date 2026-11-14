@@ -1,0 +1,33 @@
+# CS340 AddressSanitizer replication -- run matrix
+# started_utc=20261114T155152Z
+# host=Linux 5.10.16.3-microsoft-standard-WSL2 x86_64
+# nproc=20
+# clang=Ubuntu clang version 18.1.3 (1ubuntu1)
+# repetitions=3 scale=1 pin=none warmup=1
+# asan_options=quarantine_size_mb=0:malloc_context_size=0:detect_leaks=0:redzone=32
+# benchmarks=b1_malloc_text b2_pointer_chase b3_matmul b4_string_scan
+RESULT bench=b1_malloc_text config=base run=run1 wall_ms=191 vmpeak_kb=37660 vmhwm_kb=36112 exit=0 scale=1
+RESULT bench=b1_malloc_text config=base run=run2 wall_ms=170 vmpeak_kb=35944 vmhwm_kb=34528 exit=0 scale=1
+RESULT bench=b1_malloc_text config=base run=run3 wall_ms=169 vmpeak_kb=36076 vmhwm_kb=34540 exit=0 scale=1
+RESULT bench=b1_malloc_text config=asan run=run1 wall_ms=1173 vmpeak_kb=21474887740 vmhwm_kb=74880 exit=0 scale=1
+RESULT bench=b1_malloc_text config=asan run=run2 wall_ms=1103 vmpeak_kb=21474887740 vmhwm_kb=71460 exit=0 scale=1
+RESULT bench=b1_malloc_text config=asan run=run3 wall_ms=1102 vmpeak_kb=21474887740 vmhwm_kb=74064 exit=0 scale=1
+RESULT bench=b2_pointer_chase config=base run=run1 wall_ms=1150 vmpeak_kb=19068 vmhwm_kb=17716 exit=0 scale=1
+RESULT bench=b2_pointer_chase config=base run=run2 wall_ms=1125 vmpeak_kb=19068 vmhwm_kb=17464 exit=0 scale=1
+RESULT bench=b2_pointer_chase config=base run=run3 wall_ms=1125 vmpeak_kb=19068 vmhwm_kb=17420 exit=0 scale=1
+RESULT bench=b2_pointer_chase config=asan run=run1 wall_ms=1214 vmpeak_kb=21474904128 vmhwm_kb=22904 exit=0 scale=1
+RESULT bench=b2_pointer_chase config=asan run=run2 wall_ms=1171 vmpeak_kb=21474904128 vmhwm_kb=22828 exit=0 scale=1
+RESULT bench=b2_pointer_chase config=asan run=run3 wall_ms=1167 vmpeak_kb=21474904128 vmhwm_kb=20668 exit=0 scale=1
+RESULT bench=b3_matmul config=base run=run1 wall_ms=64 vmpeak_kb=14836 vmhwm_kb=13208 exit=0 scale=1
+RESULT bench=b3_matmul config=base run=run2 wall_ms=64 vmpeak_kb=14836 vmhwm_kb=13236 exit=0 scale=1
+RESULT bench=b3_matmul config=base run=run3 wall_ms=86 vmpeak_kb=14836 vmhwm_kb=13248 exit=0 scale=1
+RESULT bench=b3_matmul config=asan run=run1 wall_ms=150 vmpeak_kb=21474900940 vmhwm_kb=18680 exit=0 scale=1
+RESULT bench=b3_matmul config=asan run=run2 wall_ms=148 vmpeak_kb=21474900940 vmhwm_kb=18812 exit=0 scale=1
+RESULT bench=b3_matmul config=asan run=run3 wall_ms=148 vmpeak_kb=21474900940 vmhwm_kb=18808 exit=0 scale=1
+RESULT bench=b4_string_scan config=base run=run1 wall_ms=338 vmpeak_kb=117376 vmhwm_kb=104612 exit=0 scale=1
+RESULT bench=b4_string_scan config=base run=run2 wall_ms=339 vmpeak_kb=117376 vmhwm_kb=104648 exit=0 scale=1
+RESULT bench=b4_string_scan config=base run=run3 wall_ms=362 vmpeak_kb=117376 vmhwm_kb=104620 exit=0 scale=1
+RESULT bench=b4_string_scan config=asan run=run1 wall_ms=402 vmpeak_kb=21475035220 vmhwm_kb=119984 exit=0 scale=1
+RESULT bench=b4_string_scan config=asan run=run2 wall_ms=426 vmpeak_kb=21475035220 vmhwm_kb=120812 exit=0 scale=1
+RESULT bench=b4_string_scan config=asan run=run3 wall_ms=404 vmpeak_kb=21475035220 vmhwm_kb=121900 exit=0 scale=1
+# finished_utc=20261114T155227Z
