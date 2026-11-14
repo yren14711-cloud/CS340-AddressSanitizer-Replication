@@ -34,8 +34,7 @@ explains which behavioural class of the paper's workloads each one stands in for
 ## Experiment code
 
 The scripts in `scripts/` and the build in `Makefile` were written for this
-replication. See `docs/AI_USAGE.md` for the disclosure of AI-assisted drafting;
-that disclosure must stay consistent with the AI usage statement in the report.
+replication.
 
 ## LICENSE
 
