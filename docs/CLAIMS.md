@@ -57,11 +57,14 @@ Paper: *AddressSanitizer: A Fast Address Sanity Checker*, USENIX ATC 2012.
   which error class ASan names, and whether the uninstrumented build stays silent
   or crashes. False positives are checked with the clean benchmarks: a benchmark
   run that aborts under ASan would contradict the claim.
-- Status today: only the heap-buffer-overflow case exists
-  (`experiments/memory_errors/heap_buffer_overflow.c`). The stack, global and
-  use-after-free cases are still missing and must be added before the claim can
-  be evaluated.
-- Produced by: `make detect`, run manually, output stored under `results/detect/`.
+- Status today: four error classes have been written and tested:
+  `heap-buffer-overflow`, `stack-buffer-overflow`, `global-buffer-overflow`,
+  and `heap-use-after-free` (see `experiments/memory_errors/`). All four match
+  the expected class in `results/detect/summary.md` (`Matches expected = yes`).
+  A false-positive check on clean programs is being added under
+  `results/detect/false_positive/` this week.
+- Produced by: `scripts/run_detection.sh` (covers all four cases). Note that
+  `make detect` currently builds only the heap case from `DETECT_SRC`.
 
 ---
 
@@ -69,8 +72,8 @@ Paper: *AddressSanitizer: A Fast Address Sanity Checker*, USENIX ATC 2012.
 
 | Claim | Paper number | Our number | Verdict | Note |
 |---|---|---|---|---|
-| 1 runtime overhead | 73% average (Fig. 2) | TODO | TODO | averaged over a different benchmark mix |
-| 2 memory overhead | 3.37x average (Table 1) | TODO | TODO | |
-| 3 detection | qualitative | TODO | TODO | needs the missing error classes |
+| 1 runtime overhead | 73% average (Fig. 2) | 31.19% overall (`array_update`, 15 runs/version) | partially supported | Different workload from SPEC CPU2006; source: `results/performance/`. This is not a b1–b4 result. Batches: 34.52%, 29.27%, 27.62%. |
+| 2 memory overhead | 3.37x average (Table 1) | TODO (fill after `make run`) | TODO | Mean ± std of `VmPeak_asan / VmPeak_base`; point to `results/logs/<stamp>/runs.log`. |
+| 3 detection | qualitative | 4/4 classes detected (`results/detect/summary.md`) | partially supported | Positive cases done; false-positive check pending this week. |
 
 Allowed verdicts: supported / partially supported / not supported / inconclusive.
