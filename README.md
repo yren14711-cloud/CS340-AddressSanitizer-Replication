@@ -128,3 +128,29 @@ Our benchmark differs from the SPEC CPU2006 workloads used in the original paper
 - Logs: results/performance/benchmark_runs_batch1.log, benchmark_runs_batch2.log, benchmark_runs_batch3.log
 - Data: results/performance/benchmark_summary.csv
 - Statistics: results/performance/performance_analysis.txt
+
+## 9. Week 3: AddressSanitizer Workload Scaling Analysis
+
+This week investigates how AddressSanitizer runtime and memory overhead change as workload sizes increase.
+
+We evaluated four custom benchmarks at three workload scales (Scale 1, 2, and 3), comparing native execution (Base) against ASan-instrumented execution.
+
+### Experimental Results
+
+- 3 workload scales
+- 4 benchmarks
+- 2 configurations (Base and ASan)
+- 3 metrics (wall time, VmPeak, VmHWM)
+- 72 aggregated measurement records
+
+### Analysis and Figures
+
+- [Week 3 Analysis Report](results/week3_scaling/analysis/summary.md)
+- [Combined Experimental Dataset](results/week3_scaling/combined/combined_results.csv)
+- [Runtime Scaling](results/week3_scaling/analysis/figures/runtime_by_scale.png)
+- [ASan Slowdown](results/week3_scaling/analysis/figures/slowdown_by_scale.png)
+- [VmHWM Overhead](results/week3_scaling/analysis/figures/vmhwm_ratio_by_scale.png)
+- [VmPeak Overhead](results/week3_scaling/analysis/figures/vmpeak_ratio_by_scale.png)
+- [Average Slowdown](results/week3_scaling/analysis/figures/average_slowdown_by_scale.png)
+
+The results show that AddressSanitizer overhead varies substantially across workload types and input sizes.
