@@ -41,23 +41,29 @@ Paper: *AddressSanitizer: A Fast Address Sanity Checker*, USENIX ATC 2012.
   benchmark runs, with `VmHWM` recorded as a cross-check, using the same
   `quarantine_size_mb=0` so the caveat applies identically.
 - Metric: `mem_ratio = VmPeak_asan / VmPeak_base`, mean ± std.
-- Measured 2026-11-14 (`results/logs/20261114T155152Z/runs.log`; b1–b4, 1 warm-up +
-  3 measured runs per configuration): the `VmPeak` ratio is **not usable** in this
-  environment. Every ASan run reports `VmPeak` ≈ 21 474 860 000 kB (20.0 TB): the
-  instrumented process reserves the ASan shadow address space at start-up, and
-  that constant swamps the workload — the four ASan `VmPeak` values differ by less
-  than 150 MB, so the ratio measures the reservation, not the benchmark.
+- Final measurement 2026-11-21 (`results/memory_claim2/20261121T051205Z/`;
+  b1–b4, 1 warm-up + 3 measured runs per configuration, unmodified
+  `scripts/run_experiments.sh -n 3 -s 1`): the `VmPeak` ratio is **not usable**
+  in this environment. Every ASan run reports `VmPeak` ≈ 21 474 900 000 kB
+  (about 20 TB) because the instrumented process reserves the ASan shadow address
+  space at start-up. Within one benchmark the value is identical in all three
+  runs (sample SD = 0); across the four benchmarks it varies by 147 480 kB
+  (about 144 MiB, < 0.001% of 20 TB). The ratio therefore measures the
+  reservation, not the benchmark.
 - Reported instead: `VmHWM` (peak resident set), which a `PROT_NONE` reservation
-  cannot inflate. Per benchmark: b1 2.10x, b2 1.26x, b3 1.42x, b4 1.16x;
-  unweighted mean **1.48x**, sd over the 12 run-level ratios 0.37 (n = 3 per
-  configuration). Source: the same log. The `mem ratio` column of
-  `results/summary/summary.md` is still the `VmPeak` ratio and is **not** the
-  reported figure.
-- The 1.48x number is a resident-memory proxy on four small benchmarks, not the
+  cannot inflate. Per benchmark: b1 2.05x, b2 1.18x, b3 1.25x, b4 1.16x;
+  unweighted mean **1.41x** (sample SD 0.43 across the four benchmarks;
+  n = 3 per configuration). A second independent session the same day
+  (`20261121T051259Z`) gives 2.02x / 1.18x / 1.26x / 1.16x, unweighted mean
+  **1.40x**; every benchmark agrees within 0.03x. Tables, figures and the
+  generator script: `results/memory_claim2/`. The `mem ratio` column of
+  `results/summary/summary.md` is the 14 November `VmPeak` ratio and is **not**
+  the reported figure.
+- The 1.41x number is a resident-memory proxy on four small benchmarks, not the
   paper's `VmPeak` over SPEC CPU2006 (Table 1, 3.37x). The two are reported side
-  by side, never as a reproduction; see `docs/DEVIATIONS.md` rows 17 and 18.
+  by side, never as a reproduction; see `docs/DEVIATIONS.md` rows 17–20.
 - Produced by: `scripts/run_experiments.sh` (fields `vmpeak_kb`, `vmhwm_kb`) and
-  `scripts/parse_results.py` (column `mem ratio`).
+  `results/memory_claim2/analyze_memory_claim2.py` (tables A and B, figures A–C).
 
 ## Claim 3 — detection capability
 
@@ -89,7 +95,7 @@ Paper: *AddressSanitizer: A Fast Address Sanity Checker*, USENIX ATC 2012.
 | Claim | Paper number | Our number | Verdict | Note |
 |---|---|---|---|---|
 | 1 runtime overhead | 73% average (Fig. 2) | 31.19% overall (`array_update`, 15 runs/version) | partially supported | Different workload from SPEC CPU2006; source: `results/performance/`. This is not a b1–b4 result. Batches: 34.52%, 29.27%, 27.62%. |
-| 2 memory overhead | 3.37x average (Table 1) | 1.48x (VmHWM proxy; VmPeak unusable: constant 20 TB shadow reservation) | inconclusive | b1–b4, 3 + 1 runs each, `results/logs/20261114T155152Z/runs.log`. Metric and workload both differ from Table 1, so 3.37x is neither reproduced nor contradicted. See DEVIATIONS rows 17–18. |
+| 2 memory overhead | 3.37x average (Table 1) | 1.41x (VmHWM proxy; VmPeak unusable: constant 20 TB shadow reservation) | inconclusive | b1–b4, 1 warm-up + 3 runs per configuration, two independent sessions on 2026-11-21 (`results/memory_claim2/`, second session 1.40x; ratios reproduce within 0.03x). Metric (VmHWM vs VmPeak) and workload (4 microbenchmarks vs SPEC CPU2006) both differ from Table 1, so 3.37x is neither reproduced nor contradicted. See DEVIATIONS rows 17–20. |
 | 3 detection | qualitative | 4/4 classes detected (`results/detect/summary.md`) | partially supported | Positive cases done; false-positive check pending this week. |
 
 Allowed verdicts: supported / partially supported / not supported / inconclusive.
