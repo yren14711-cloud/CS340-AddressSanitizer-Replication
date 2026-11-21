@@ -154,3 +154,35 @@ We evaluated four custom benchmarks at three workload scales (Scale 1, 2, and 3)
 - [Average Slowdown](results/week3_scaling/analysis/figures/average_slowdown_by_scale.png)
 
 The results show that AddressSanitizer overhead varies substantially across workload types and input sizes.
+
+## 10. Results & Figures
+
+This section is an index. Each experiment's own `summary.md`, `README.md` or raw
+log is authoritative for its numbers; this section does not restate or replace
+them.
+
+| Area | What it shows | Where |
+|---|---|---|
+| Paper vs. ours | Why 73% vs. 31.19% (runtime) and 3.37x vs. 1.41x (memory) are not like-for-like; Figure 1 | [docs/PAPER_VS_OURS.md](docs/PAPER_VS_OURS.md) |
+| Figure and table inventory | Every report figure/table with claim, file, data source, owner and pending status | [docs/FIGURE_INVENTORY.md](docs/FIGURE_INVENTORY.md) |
+| Runtime comparison data (Claim 1) | Report-level CSV behind Figure 1 | [results/report/paper_vs_ours_runtime.csv](results/report/paper_vs_ours_runtime.csv) |
+| Runtime experiment (Week 2) | Native vs. ASan `array_update`, batches and statistics | [results/performance/](results/performance/) |
+| Memory overhead (Claim 2) | Two b1–b4 VmHWM sessions, tables A/B, figures A–C | [results/memory_claim2/](results/memory_claim2/) |
+| Detection (Claim 3) | Four error classes, plain/ASan logs, detection matrix table | [results/detect/](results/detect/) |
+| Workload scaling (Week 3) | b1–b4 at scales 1–3, runtime and memory figures | [results/week3_scaling/analysis/summary.md](results/week3_scaling/analysis/summary.md) |
+| Claims and deviations | Claim wording, verdicts, quantified deviations | [docs/CLAIMS.md](docs/CLAIMS.md), [docs/DEVIATIONS.md](docs/DEVIATIONS.md) |
+
+Proposed report numbering (final numbering is the report lead's call): Figure 1
+runtime Paper-vs-Ours; Figure 2 Claim 2 memory; Figure 3 Claim 3 detection
+matrix; Figures 4–8 workload scaling. See
+[docs/FIGURE_INVENTORY.md](docs/FIGURE_INVENTORY.md).
+
+To regenerate Figure 1 from the committed CSV:
+
+```sh
+python3 scripts/plot_paper_vs_ours.py
+```
+
+matplotlib is required; the script reads
+`results/report/paper_vs_ours_runtime.csv` and writes
+`results/figures/paper_vs_ours_runtime.png`.
