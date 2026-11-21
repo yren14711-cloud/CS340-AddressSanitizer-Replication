@@ -1,0 +1,77 @@
+# Figure and table inventory (report material)
+
+This file is the group-level index of every figure and table the final report may
+use. For each item it records the claim it supports, the committed file, the data
+source behind it, the owner, and the limitation the report must state next to it.
+It is an index, not a second copy of the results: the linked files are the
+authoritative records and are never edited from here.
+
+**Status legend**
+- **delivered** — the file exists in this repository at the path shown.
+- **pending** — expected from the owner; not yet in the repository. Do not cite a
+  number, a path or a verdict for a pending item before it is delivered.
+
+**Numbering.** The numbers below are the proposed report numbering agreed for the
+Week 3 package. The report lead has the final say when the report is assembled; if
+the numbering changes, update this file, not the underlying figures.
+
+- Figure 1 — runtime: paper vs. ours (Claim 1)
+- Figure 2 — memory overhead (Claim 2)
+- Figure 3 — detection matrix (Claim 3)
+- Figures 4–8 — workload scaling (extension)
+
+## 1. Main report figures
+
+| No. | Status | Title | Claim | File | Data source | Owner | Limitations to state in the report |
+|---|---|---|---|---|---|---|---|
+| 1 | delivered | Runtime overhead: paper vs. our replication (73% SPEC CPU2006 vs. 31.19% `array_update`, with the three batches) | Claim 1 | [`results/figures/paper_vs_ours_runtime.png`](../results/figures/paper_vs_ours_runtime.png) | [`results/report/paper_vs_ours_runtime.csv`](../results/report/paper_vs_ours_runtime.csv), whose values trace to [`results/performance/performance_analysis.txt`](../results/performance/performance_analysis.txt) and [`results/performance/benchmark_summary.csv`](../results/performance/benchmark_summary.csv) | 贾越凯 (1230022503) | Different workloads and hardware: paper = SPEC CPU2006 average (Fig. 2); ours = custom 64 MiB `array_update` on WSL2. Not a same-workload reproduction. 31.19% is an overall cross-batch aggregate (15 runs/version; batches 34.52 / 29.27 / 27.62%, 5 runs/version each). No error bars: no matching SD is available for either overhead ratio. Figure generated from the CSV by [`scripts/plot_paper_vs_ours.py`](../scripts/plot_paper_vs_ours.py); no value is hard-coded. |
+| 2 | delivered | Claim 2 memory overhead: base vs. ASan peak resident memory (VmHWM) per benchmark, mean ± 1 sample SD, n = 3 | Claim 2 | [`results/memory_claim2/20261121T051205Z/figures/fig_a_vmhwm_bars.png`](../results/memory_claim2/20261121T051205Z/figures/fig_a_vmhwm_bars.png) | [`results/memory_claim2/20261121T051205Z/results.csv`](../results/memory_claim2/20261121T051205Z/results.csv) and [`runs.log`](../results/memory_claim2/20261121T051205Z/runs.log); tables in [`summary.md`](../results/memory_claim2/20261121T051205Z/summary.md) | 叶景威 (1240004926) | This is **VmHWM** (peak resident set), not the paper's **VmPeak**; the paper's Table 1 average of 3.37x is SPEC CPU2006 on VmPeak. Our unweighted mean is 1.41x over four microbenchmarks (b1 2.05x, b2 1.18x, b3 1.25x, b4 1.16x); the independent second session gives 1.40x (2.02 / 1.18 / 1.26 / 1.16x). Different metric **and** different workload: 3.37x is neither reproduced nor contradicted. ASan VmPeak is unusable here (~21.47 billion kB, about 20 TB of reserved shadow address space), so VmPeak and VmHWM must not be treated as the same metric. |
+| 3 | **pending** | Claim 3 detection matrix: four error classes × plain/ASan builds, reported class and match | Claim 3 | *expected* `results/figures/claim3_detection_matrix.png` — **not yet committed; do not create or link a placeholder file** | Existing evidence table [`results/detect/summary.md`](../results/detect/summary.md) and the per-case logs in [`results/detect/`](../results/detect/); cases in [`experiments/memory_errors/`](../experiments/memory_errors/) | 王乐樵 (5260001105) | Positive cases are complete (4/4 classes match: heap-, stack-, global-buffer-overflow, heap-use-after-free). The clean-program **false-positive check** has not produced a complete evidence set, so the report may not claim "without false positives" yet. The matrix figure itself is not delivered; only the table exists. Keep the verdict at "partially supported" until the false-positive run is committed. |
+| 4 | delivered | Runtime by scale: base vs. ASan wall time for b1–b4 at scales 1, 2, 3 | Claim 1 (extension) | [`results/week3_scaling/analysis/figures/runtime_by_scale.png`](../results/week3_scaling/analysis/figures/runtime_by_scale.png) | [`results/week3_scaling/combined/combined_results.csv`](../results/week3_scaling/combined/combined_results.csv); [`results/week3_scaling/analysis/summary.md`](../results/week3_scaling/analysis/summary.md) | 任奕安 (1240014055) | Four custom microbenchmarks, not SPEC CPU2006; WSL2. `summary.md` numbers this figure "Figure 1" internally; report numbering (Figure 4) is provisional. Do not edit the raw scale directories. |
+| 5 | delivered | ASan runtime slowdown by scale, per benchmark | Claim 1 (extension) | [`results/week3_scaling/analysis/figures/slowdown_by_scale.png`](../results/week3_scaling/analysis/figures/slowdown_by_scale.png) | Same as Figure 4 | 任奕安 (1240014055) | Values are `(mean ASan wall / mean base wall - 1) × 100`; b4 at scale 1 is −5.7%, which must not be presented as a proven speed-up (small sample, variability). `summary.md` calls this "Figure 2". |
+| 6 | delivered | ASan resident-memory ratio (VmHWM) by scale | Claim 2 (extension) | [`results/week3_scaling/analysis/figures/vmhwm_ratio_by_scale.png`](../results/week3_scaling/analysis/figures/vmhwm_ratio_by_scale.png) | Same as Figure 4 | 任奕安 (1240014055) | VmHWM is a resident-memory proxy; it cannot be compared column-for-column with the paper's VmPeak 3.37x. Ratios are 1.32–1.40x unweighted across the four benchmarks. `summary.md` calls this "Figure 3". |
+| 7 | delivered | ASan virtual-memory ratio (VmPeak) by scale — **not physical memory** | Claim 2 (extension, caveat) | [`results/week3_scaling/analysis/figures/vmpeak_ratio_by_scale.png`](../results/week3_scaling/analysis/figures/vmpeak_ratio_by_scale.png) | Same as Figure 4 | 任奕安 (1240014055) | ASan VmPeak is ~21.47 billion kB (~20 TB) because the runtime reserves shadow address space; the figure displays that reservation, not RAM use. It must not be read as a physical-memory increase, and VmPeak/VmHWM ratios must not be mixed. `summary.md` calls this "Figure 4". |
+| 8 | delivered | Unweighted average ASan runtime slowdown by scale | Claim 1 (extension) | [`results/week3_scaling/analysis/figures/average_slowdown_by_scale.png`](../results/week3_scaling/analysis/figures/average_slowdown_by_scale.png) | Same as Figure 4 | 任奕安 (1240014055) | The average is an **unweighted mean over four microbenchmarks**, dominated by the allocation-heavy b1; it is not a SPEC CPU2006 average and does not reproduce the paper's 73%. No monotonic trend (193.8 / 177.2 / 184.7%). `summary.md` calls this "Figure 5". |
+
+## 2. Supplementary figures (appendix; no report number)
+
+| Id | Status | Title | Claim | File | Data source | Owner | Limitations |
+|---|---|---|---|---|---|---|---|
+| S1 | delivered | Per-benchmark VmHWM ratio, 1.0x baseline | Claim 2 | [`fig_b_vmhwm_ratio.png`](../results/memory_claim2/20261121T051205Z/figures/fig_b_vmhwm_ratio.png) | Same session data as Figure 2 | 叶景威 (1240004926) | Supplement to Figure 2; same VmHWM-vs-VmPeak caveat. |
+| S2 | delivered | VmHWM ratio across the primary session and the two 14 November sessions | Claim 2 | [`fig_c_ratio_sessions.png`](../results/memory_claim2/20261121T051205Z/figures/fig_c_ratio_sessions.png) | `results/memory_claim2/20261121T051205Z/results.csv`; `results/logs/20261114T155152Z/` and `results/logs/20261114T161554Z/` | 叶景威 (1240004926) | The first 14 November session ran on a different kernel (5.10.16.3); the second matches the 21 November kernel (6.18.33.2). This compares session-level reproducibility, not two machines; sessions are never pooled. |
+| S3 | delivered | Second independent Claim 2 session (bars and ratio) | Claim 2 | [`results/memory_claim2/20261121T051259Z/figures/`](../results/memory_claim2/20261121T051259Z/figures/) | `20261121T051259Z/results.csv`, `runs.log` | 叶景威 (1240004926) | Reproducibility evidence only; values agree with Figure 2 within 0.03x per benchmark. Do not merge the two sessions into one n. |
+| S4 | delivered | Week 2 native vs. ASan runtime, ±1 sample SD (n = 5 per version per batch) | Claim 1 context | [`results/performance/performance_comparison.png`](../results/performance/performance_comparison.png) | [`results/performance/benchmark_summary.csv`](../results/performance/benchmark_summary.csv); [`performance_analysis.txt`](../results/performance/performance_analysis.txt) | 任奕安 (1240014055) | Context for the batch rows of Figure 1, not a paper comparison; README section 8 is the narrative source. |
+
+## 3. Supporting tables (not figures)
+
+| Table | Status | Content | File | Owner |
+|---|---|---|---|---|
+| T1 | delivered | Report-level runtime comparison: one paired 73% vs. 31.19% row plus the three batch rows, each with source and comparability notes | [`results/report/paper_vs_ours_runtime.csv`](../results/report/paper_vs_ours_runtime.csv) | 贾越凯 (1230022503) |
+| T2 | delivered | Claim 2 Table A (VmHWM, reported) and Table B (VmPeak, completeness only), per-run raw values | [`results/memory_claim2/20261121T051205Z/summary.md`](../results/memory_claim2/20261121T051205Z/summary.md) | 叶景威 (1240004926) |
+| T3 | delivered (positive cases only) | Detection matrix: one row per error class, plain/ASan exit codes, reported class, match | [`results/detect/summary.md`](../results/detect/summary.md) | 王乐樵 (5260001105) |
+| T4 | delivered | Claim 1 batch table: native/ASan mean, SD, overhead, n = 5 per version per batch | README section 8; [`performance_analysis.txt`](../results/performance/performance_analysis.txt) | 任奕安 (1240014055) |
+| T5 | delivered | Claim wording, verdicts, per-claim notes | [`docs/CLAIMS.md`](CLAIMS.md) | group |
+| T6 | delivered | Quantified deviations from the paper's setup (benchmark, CPU, compiler, ASan options, hosts) | [`docs/DEVIATIONS.md`](DEVIATIONS.md) | group |
+
+## 4. Pending deliveries and status notes
+
+| Item | Expected from | Why it is pending | What not to do |
+|---|---|---|---|
+| Claim 3 detection matrix figure and clean-program false-positive evidence | 王乐樵 (5260001105) | Only the four positive cases are committed; no `results/detect/false_positive/` evidence and no matrix figure exist yet. | Do not create a placeholder PNG/path, do not write "no false positives", and do not change the Claim 3 verdict to "supported". |
+| Final figure numbering, cross-references and caption sign-off | report lead | Figures 1–8 above are a proposal; the report lead unifies numbering when assembling the report. | Do not renumber the underlying files; update this inventory and the references instead. |
+| Claim 2 status change | — (record only) | The Week 3 task brief expected Claims 2 and 3 to be pending. Claim 2 was delivered on 2026-11-21 in PR #2 (`a8e8cf1`, `86c979c`) and is already on `main`; only editorial selection remains (proposal: `fig_a` = Figure 2, `fig_b`/`fig_c` = appendix). | Do not list Claim 2 numbers as pending, and do not present 1.41x as a reproduction of 3.37x. |
+
+## 5. Rules for changing this inventory
+
+1. Every **delivered** row must point to a file that exists in the repository; every
+   **pending** row must say what is missing and must not carry an invented path or
+   number.
+2. A figure's data source must be a committed CSV, log or summary file — never a
+   number typed only into the caption.
+3. Every caption states the unit, the sample size, and what the error bars are (or
+   that they are absent).
+4. Raw experiment data is owned by its author: do not edit
+   `results/week3_scaling/`, `results/memory_claim2/*/raw/`, `results/detect/*.log`
+   or their generators to make a figure look different. Ask the owner instead.
+5. When Claim 3 is delivered, change its status to **delivered**, add the real path,
+   and link it from `docs/CLAIMS.md` and `results/detect/summary.md`.
