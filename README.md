@@ -245,3 +245,37 @@ Run the stored-data audit from the repository root:
 The audit distinguishes verified results from limitations.
 It does not rerun the original benchmarks or overwrite
 historical measurement records.
+
+
+## 13. Final Report Preparation
+
+The Week 4 integration package consolidates the replication
+results, extension studies, statistical conventions and
+reproducibility records.
+
+The report is framed as a Partial Replication and Extension
+Study of AddressSanitizer.
+
+### Report planning documents
+
+- [Final report outline](docs/REPORT_OUTLINE.md)
+- [Individual contributions and writing assignments](docs/CONTRIBUTIONS.md)
+- [Final report submission checklist](docs/FINAL_REPORT_CHECKLIST.md)
+
+### Evidence and reporting documents
+
+- [Claim verdicts](docs/CLAIMS.md)
+- [Paper vs. ours](docs/PAPER_VS_OURS.md)
+- [Replication deviations](docs/DEVIATIONS.md)
+- [Figure inventory](docs/FIGURE_INVENTORY.md)
+- [Statistical conventions](docs/STATISTICAL_CONVENTIONS.md)
+- [Reproducibility documentation](docs/REPRODUCIBILITY.md)
+- [Audit results](results/audit/)
+
+The final report will use these integrated records as its
+experimental evidence base.
+
+Report drafting, member review and course submission
+are tracked separately from experiment integration.
+
+See the [final report key results](results/report/final_report_key_results.md) for a numerical evidence summary.
