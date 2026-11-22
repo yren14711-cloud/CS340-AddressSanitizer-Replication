@@ -1,35 +1,33 @@
 ### asan build: experiments/memory_errors/stack_buffer_overflow.c
 ### command: ASAN_OPTIONS=detect_leaks=0 build/detect_stack_buffer_overflow_asan
 =================================================================
-==895==ERROR: AddressSanitizer: stack-buffer-overflow on address 0x797796b00030 at pc 0x5ac9e4115c04 bp 0x7ffc81e02cf0 sp 0x7ffc81e02ce8
-WRITE of size 4 at 0x797796b00030 thread T0
-==895==WARNING: invalid path to external symbolizer!
-==895==WARNING: Failed to use and restart external symbolizer!
-    #0 0x5ac9e4115c03  (/mnt/d/Java/IdeaProjects/CS340-AddressSanitizer-Replication/build/detect_stack_buffer_overflow_asan+0x115c03) (BuildId: d4c1609252bdee5da7640d9792338e0e017ccbc0)
-    #1 0x7d7798c2a600  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a600) (BuildId: 066527e430a32768d82741e00b81eebb1a872294)
-    #2 0x7d7798c2a717  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a717) (BuildId: 066527e430a32768d82741e00b81eebb1a872294)
-    #3 0x5ac9e402c364  (/mnt/d/Java/IdeaProjects/CS340-AddressSanitizer-Replication/build/detect_stack_buffer_overflow_asan+0x2c364) (BuildId: d4c1609252bdee5da7640d9792338e0e017ccbc0)
+==7322==ERROR: AddressSanitizer: stack-buffer-overflow on address 0x7e168bf00030 at pc 0x565535199884 bp 0x7ffc8247e2d0 sp 0x7ffc8247e2c8
+WRITE of size 4 at 0x7e168bf00030 thread T0
+    #0 0x565535199883 in main /workspaces/CS340-AddressSanitizer-Replication/experiments/memory_errors/stack_buffer_overflow.c:31:19
+    #1 0x7e168dfbf1c9 in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #2 0x7e168dfbf28a in __libc_start_main csu/../csu/libc-start.c:360:3
+    #3 0x5655350c0344 in _start (/workspaces/CS340-AddressSanitizer-Replication/build/detect_stack_buffer_overflow_asan+0x2b344) (BuildId: aea3283e6bcf75694ea3263bbd5deca6ecb5fd7d)
 
-Address 0x797796b00030 is located in stack of thread T0 at offset 48 in frame
-    #0 0x5ac9e4115abf  (/mnt/d/Java/IdeaProjects/CS340-AddressSanitizer-Replication/build/detect_stack_buffer_overflow_asan+0x115abf) (BuildId: d4c1609252bdee5da7640d9792338e0e017ccbc0)
+Address 0x7e168bf00030 is located in stack of thread T0 at offset 48 in frame
+    #0 0x56553519973f in main /workspaces/CS340-AddressSanitizer-Replication/experiments/memory_errors/stack_buffer_overflow.c:19
 
   This frame has 1 object(s):
     [32, 48) 'buffer' (line 20) <== Memory access at offset 48 overflows this variable
 HINT: this may be a false positive if your program uses some custom stack unwind mechanism, swapcontext or vfork
       (longjmp and C++ exceptions *are* supported)
-SUMMARY: AddressSanitizer: stack-buffer-overflow (/mnt/d/Java/IdeaProjects/CS340-AddressSanitizer-Replication/build/detect_stack_buffer_overflow_asan+0x115c03) (BuildId: d4c1609252bdee5da7640d9792338e0e017ccbc0) 
+SUMMARY: AddressSanitizer: stack-buffer-overflow /workspaces/CS340-AddressSanitizer-Replication/experiments/memory_errors/stack_buffer_overflow.c:31:19 in main
 Shadow bytes around the buggy address:
-  0x797796affd80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  0x797796affe00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  0x797796affe80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  0x797796afff00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  0x797796afff80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-=>0x797796b00000: f1 f1 f1 f1 00 00[f3]f3 00 00 00 00 00 00 00 00
-  0x797796b00080: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  0x797796b00100: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  0x797796b00180: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  0x797796b00200: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  0x797796b00280: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7e168beffd80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7e168beffe00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7e168beffe80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7e168befff00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7e168befff80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x7e168bf00000: f1 f1 f1 f1 00 00[f3]f3 00 00 00 00 00 00 00 00
+  0x7e168bf00080: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7e168bf00100: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7e168bf00180: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7e168bf00200: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7e168bf00280: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
 Shadow byte legend (one shadow byte represents 8 application bytes):
   Addressable:           00
   Partially addressable: 01 02 03 04 05 06 07 
@@ -49,4 +47,4 @@ Shadow byte legend (one shadow byte represents 8 application bytes):
   ASan internal:           fe
   Left alloca redzone:     ca
   Right alloca redzone:    cb
-==895==ABORTING
+==7322==ABORTING

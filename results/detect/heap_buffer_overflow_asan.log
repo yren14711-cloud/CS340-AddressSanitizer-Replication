@@ -3,36 +3,34 @@
 Allocated 5 integers; valid indices are 0 through 4.
 Intentionally reading numbers[5] to test AddressSanitizer.
 =================================================================
-==881==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x763fe67e0054 at pc 0x5f21a308cbe1 bp 0x7ffc12a2ad10 sp 0x7ffc12a2ad08
-READ of size 4 at 0x763fe67e0054 thread T0
-==881==WARNING: invalid path to external symbolizer!
-==881==WARNING: Failed to use and restart external symbolizer!
-    #0 0x5f21a308cbe0  (/mnt/d/Java/IdeaProjects/CS340-AddressSanitizer-Replication/build/detect_heap_buffer_overflow_asan+0x115be0) (BuildId: e32a1577e401763373d863872c2274e800455349)
-    #1 0x7a0fe742a600  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a600) (BuildId: 066527e430a32768d82741e00b81eebb1a872294)
-    #2 0x7a0fe742a717  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a717) (BuildId: 066527e430a32768d82741e00b81eebb1a872294)
-    #3 0x5f21a2fa3374  (/mnt/d/Java/IdeaProjects/CS340-AddressSanitizer-Replication/build/detect_heap_buffer_overflow_asan+0x2c374) (BuildId: e32a1577e401763373d863872c2274e800455349)
+==7287==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x503000000054 at pc 0x56da71890861 bp 0x7ffd46340340 sp 0x7ffd46340338
+READ of size 4 at 0x503000000054 thread T0
+    #0 0x56da71890860 in main /workspaces/CS340-AddressSanitizer-Replication/experiments/memory_errors/heap_buffer_overflow.c:28:17
+    #1 0x703366c781c9 in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #2 0x703366c7828a in __libc_start_main csu/../csu/libc-start.c:360:3
+    #3 0x56da717b7354 in _start (/workspaces/CS340-AddressSanitizer-Replication/build/detect_heap_buffer_overflow_asan+0x2b354) (BuildId: eb46166e5c889c15c9b3691dcffa249ec00cc438)
 
-0x763fe67e0054 is located 0 bytes after 20-byte region [0x763fe67e0040,0x763fe67e0054)
+0x503000000054 is located 0 bytes after 20-byte region [0x503000000040,0x503000000054)
 allocated by thread T0 here:
-    #0 0x5f21a3048918  (/mnt/d/Java/IdeaProjects/CS340-AddressSanitizer-Replication/build/detect_heap_buffer_overflow_asan+0xd1918) (BuildId: e32a1577e401763373d863872c2274e800455349)
-    #1 0x5f21a308cad4  (/mnt/d/Java/IdeaProjects/CS340-AddressSanitizer-Replication/build/detect_heap_buffer_overflow_asan+0x115ad4) (BuildId: e32a1577e401763373d863872c2274e800455349)
-    #2 0x7a0fe742a600  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a600) (BuildId: 066527e430a32768d82741e00b81eebb1a872294)
-    #3 0x7a0fe742a717  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a717) (BuildId: 066527e430a32768d82741e00b81eebb1a872294)
-    #4 0x5f21a2fa3374  (/mnt/d/Java/IdeaProjects/CS340-AddressSanitizer-Replication/build/detect_heap_buffer_overflow_asan+0x2c374) (BuildId: e32a1577e401763373d863872c2274e800455349)
+    #0 0x56da718521a3 in malloc (/workspaces/CS340-AddressSanitizer-Replication/build/detect_heap_buffer_overflow_asan+0xc61a3) (BuildId: eb46166e5c889c15c9b3691dcffa249ec00cc438)
+    #1 0x56da71890754 in main /workspaces/CS340-AddressSanitizer-Replication/experiments/memory_errors/heap_buffer_overflow.c:8:20
+    #2 0x703366c781c9 in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #3 0x703366c7828a in __libc_start_main csu/../csu/libc-start.c:360:3
+    #4 0x56da717b7354 in _start (/workspaces/CS340-AddressSanitizer-Replication/build/detect_heap_buffer_overflow_asan+0x2b354) (BuildId: eb46166e5c889c15c9b3691dcffa249ec00cc438)
 
-SUMMARY: AddressSanitizer: heap-buffer-overflow (/mnt/d/Java/IdeaProjects/CS340-AddressSanitizer-Replication/build/detect_heap_buffer_overflow_asan+0x115be0) (BuildId: e32a1577e401763373d863872c2274e800455349) 
+SUMMARY: AddressSanitizer: heap-buffer-overflow /workspaces/CS340-AddressSanitizer-Replication/experiments/memory_errors/heap_buffer_overflow.c:28:17 in main
 Shadow bytes around the buggy address:
-  0x763fe67dfd80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  0x763fe67dfe00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  0x763fe67dfe80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  0x763fe67dff00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  0x763fe67dff80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-=>0x763fe67e0000: fa fa 00 00 00 fa fa fa 00 00[04]fa fa fa fa fa
-  0x763fe67e0080: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
-  0x763fe67e0100: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
-  0x763fe67e0180: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
-  0x763fe67e0200: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
-  0x763fe67e0280: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x502ffffffd80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x502ffffffe00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x502ffffffe80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x502fffffff00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x502fffffff80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x503000000000: fa fa 00 00 00 fa fa fa 00 00[04]fa fa fa fa fa
+  0x503000000080: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x503000000100: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x503000000180: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x503000000200: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x503000000280: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
 Shadow byte legend (one shadow byte represents 8 application bytes):
   Addressable:           00
   Partially addressable: 01 02 03 04 05 06 07 
@@ -52,4 +50,4 @@ Shadow byte legend (one shadow byte represents 8 application bytes):
   ASan internal:           fe
   Left alloca redzone:     ca
   Right alloca redzone:    cb
-==881==ABORTING
+==7287==ABORTING
