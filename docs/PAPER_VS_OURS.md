@@ -95,10 +95,10 @@ across the four benchmarks). The independent second session
 benchmark reproduces within 0.03x.
 
 **Why VmPeak is not used.** Every ASan run in this environment reports
-`VmPeak` ≈ 21 474 900 000 kB (about 20 TB) because the runtime reserves its shadow
+`VmPeak` ≈ 21 474 900 000 kB (about 20 TiB) because the runtime reserves its shadow
 address space at start-up. Within a benchmark the value is identical across the
 three runs (sample SD = 0); across the four benchmarks it varies by only
-147 480 kB (< 0.001% of 20 TB). A ratio built on that number (1.8×10⁵–1.4×10⁶x)
+147 480 kB (< 0.001% of 20 TiB). A ratio built on that number (1.8×10⁵–1.4×10⁶x)
 measures the reservation, not the program, so it is reported only in Table B of
 the Claim 2 summary for transparency. `VmHWM` cannot be inflated by a
 `PROT_NONE` reservation and is the closest available proxy.
@@ -165,13 +165,13 @@ It reports unweighted average slowdowns of 193.8%, 177.2% and 184.7% and VmHWM
 ratios of 1.402x, 1.320x and 1.360x. These are **not** SPEC CPU2006 numbers and do
 not reproduce 73% or 3.37x; the scaling figures are catalogued as Figures 4–8 in
 [`docs/FIGURE_INVENTORY.md`](FIGURE_INVENTORY.md). The VmPeak scaling figure must
-be read as a virtual-address-space reservation (~20 TB), never as physical RAM.
+be read as a virtual-address-space reservation (~20 TiB), never as physical RAM.
 
 ## 5. What the report must not claim
 
 - That 31.19% reproduces, or is directly comparable with, the paper's 73%.
 - That 1.41x reproduces the paper's 3.37x; the metric and the workload both differ.
-- That VmPeak (≈20 TB) is physical memory use, or that VmPeak and VmHWM can be
+- That VmPeak (≈20 TiB) is physical memory use, or that VmPeak and VmHWM can be
   used interchangeably.
 - Any standard deviation for the paper's 73%, or an error bar on Figure 1 invented
   to fill the gap.
@@ -242,3 +242,8 @@ Evidence and reproduction instructions:
 - [Comparison CSV](../results/cross_environment/comparison.csv)
 - [Figure 9](../results/cross_environment/figures/vmhwm_cross_environment.png)
 - [Analysis script](../results/cross_environment/plot_comparison.py)
+
+
+## Reporting conventions
+
+Final report terminology, aggregation, uncertainty and claim interpretation follow [Statistical and Reporting Conventions](STATISTICAL_CONVENTIONS.md).

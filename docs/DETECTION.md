@@ -60,3 +60,17 @@ run.
 4. A verdict for Claim 3. Four cases plus a clean benchmark suite supports
    "supported" for the mechanism; it does not reproduce the paper's bug-finding
    record in real software, which the report should state as a limitation.
+
+
+## Reporting note (Week 4)
+
+The completed clean-control experiment establishes 24/24 normal
+exits across both build variants and 0/12 observed ASan false
+positives among the ASan-enabled executions.
+
+The stdout-equivalence criterion above is a separate validation
+requirement. Normal exits and absent ASan reports alone do not
+establish that every Base and ASan stdout is identical.
+
+See [the detection summary](../results/detect/summary.md) and
+[the statistical conventions](STATISTICAL_CONVENTIONS.md).

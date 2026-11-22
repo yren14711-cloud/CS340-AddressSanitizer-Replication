@@ -22,7 +22,7 @@ Paper: *AddressSanitizer: A Fast Address Sanity Checker*, USENIX ATC 2012.
   malloc-intensive with many 1- and 2-byte accesses.
 - What we measure: wall time of `build/<bench>-base` vs `build/<bench>-asan`,
   same `-O2`, same machine, 3 measured repetitions after a discarded warm-up.
-- Metric: `slowdown = (T_asan - T_base) / T_base * 100%`, reported as
+- Metric: `slowdown = (mean(T_asan) / mean(T_base) - 1) * 100%`, reported as
   mean ± std.
 - Produced by: `scripts/run_experiments.sh` + `scripts/parse_results.py`
   (column `slowdown` in `summary.md`).
@@ -40,15 +40,15 @@ Paper: *AddressSanitizer: A Fast Address Sanity Checker*, USENIX ATC 2012.
 - What we measure: `VmPeak` sampled from `/proc/<pid>/status` while the
   benchmark runs, with `VmHWM` recorded as a cross-check, using the same
   `quarantine_size_mb=0` so the caveat applies identically.
-- Metric: `mem_ratio = VmPeak_asan / VmPeak_base`, mean ± std.
+- Metric: `VmPeak ratio = mean(VmPeak_asan) / mean(VmPeak_base)` (historical diagnostic metric). The primary reported metric is the ratio of mean VmHWM values.
 - Final measurement 2026-11-21 (`results/memory_claim2/20261121T051205Z/`;
   b1–b4, 1 warm-up + 3 measured runs per configuration, unmodified
   `scripts/run_experiments.sh -n 3 -s 1`): the `VmPeak` ratio is **not usable**
   in this environment. Every ASan run reports `VmPeak` ≈ 21 474 900 000 kB
-  (about 20 TB) because the instrumented process reserves the ASan shadow address
+  (about 20 TiB) because the instrumented process reserves the ASan shadow address
   space at start-up. Within one benchmark the value is identical in all three
   runs (sample SD = 0); across the four benchmarks it varies by 147 480 kB
-  (about 144 MiB, < 0.001% of 20 TB). The ratio therefore measures the
+  (about 144 MiB, < 0.001% of 20 TiB). The ratio therefore measures the
   reservation, not the benchmark.
 - Reported instead: `VmHWM` (peak resident set), which a `PROT_NONE` reservation
   cannot inflate. Per benchmark: b1 2.05x, b2 1.18x, b3 1.25x, b4 1.16x;
@@ -107,8 +107,8 @@ Paper: *AddressSanitizer: A Fast Address Sanity Checker*, USENIX ATC 2012.
 | Claim | Paper number | Our number | Verdict | Note |
 |---|---|---|---|---|
 | 1 runtime overhead | 73% average (Fig. 2) | 31.19% overall (`array_update`, 15 runs/version) | partially supported | Different workload from SPEC CPU2006; source: `results/performance/`. This is not a b1–b4 result. Batches: 34.52%, 29.27%, 27.62%. |
-| 2 memory overhead | 3.37x average (Table 1) | 1.41x (VmHWM proxy; VmPeak unusable: constant 20 TB shadow reservation) | inconclusive | b1–b4, 1 warm-up + 3 runs per configuration, two independent sessions on 2026-11-21 (`results/memory_claim2/`, second session 1.40x; ratios reproduce within 0.03x). Metric (VmHWM vs VmPeak) and workload (4 microbenchmarks vs SPEC CPU2006) both differ from Table 1, so 3.37x is neither reproduced nor contradicted. See DEVIATIONS rows 17–20. |
-| 3 detection | qualitative | 4/4 error cases correctly detected; 24/24 clean-control executions successful; 0/12 observed ASan false positives | supported | Supported for the tested cases only; not a proof of universal detection completeness or zero false positives. See `results/detect/summary.md` and `results/detect/false_positive/summary.csv`. |
+| 2 memory overhead | 3.37x average (Table 1) | 1.41x (VmHWM proxy; VmPeak unusable: constant 20 TiB shadow reservation) | inconclusive | b1–b4, 1 warm-up + 3 runs per configuration, two independent sessions on 2026-11-21 (`results/memory_claim2/`, second session 1.40x; ratios reproduce within 0.03x). Metric (VmHWM vs VmPeak) and workload (4 microbenchmarks vs SPEC CPU2006) both differ from Table 1, so 3.37x is neither reproduced nor contradicted. See DEVIATIONS rows 17–20. |
+| 3 detection | qualitative | 4/4 error cases correctly detected; 24/24 clean-control executions successful; 0/12 observed ASan false positives | supported for the tested cases | Supported for the tested cases only; not a proof of universal detection completeness or zero false positives. See `results/detect/summary.md` and `results/detect/false_positive/summary.csv`. |
 
 Allowed verdicts: supported / partially supported / not supported / inconclusive.
 
@@ -147,3 +147,8 @@ Evidence and reproduction instructions:
 - [Comparison CSV](../results/cross_environment/comparison.csv)
 - [Figure 9](../results/cross_environment/figures/vmhwm_cross_environment.png)
 - [Analysis script](../results/cross_environment/plot_comparison.py)
+
+
+## Reporting conventions
+
+Final report terminology, aggregation, uncertainty and claim interpretation follow [Statistical and Reporting Conventions](STATISTICAL_CONVENTIONS.md).

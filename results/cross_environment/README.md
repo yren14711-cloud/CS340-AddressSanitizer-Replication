@@ -218,3 +218,19 @@ Serebryany, K., Bruening, D., Potapenko, A., and Vyukov, D.
 USENIX Annual Technical Conference.
 
 https://www.usenix.org/system/files/conference/atc12/atc12-final39.pdf
+
+## Reporting clarification
+
+This analysis reuses 72 measured executions and introduces
+no new experimental executions.
+
+The absence of ratio error bars means that uncertainty
+of the ratios was not estimated. It does not imply that
+the underlying measurements have zero variability.
+
+The comparisons are descriptive. Differences in host,
+compiler and environment have not been isolated experimentally.
+Matching committed source snapshots does not independently
+establish that every historical run used an unmodified worktree.
+
+See [Statistical and Reporting Conventions](../../docs/STATISTICAL_CONVENTIONS.md).
