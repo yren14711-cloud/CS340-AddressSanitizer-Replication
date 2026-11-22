@@ -1,0 +1,83 @@
+
+===== scripts/plot_paper_vs_ours.py =====
+series          value  unit    n  label
+paper           73.00     %    -  Paper / SPEC CPU2006 / (Fig. 2)
+ours_overall    31.19     %   15  Ours / array_update / overall
+ours_batch      34.52     %    5  Ours / batch 1
+ours_batch      29.27     %    5  Ours / batch 2
+ours_batch      27.62     %    5  Ours / batch 3
+wrote results/figures/paper_vs_ours_runtime.png
+[PASS] Regenerated: results/figures/paper_vs_ours_runtime.png
+
+===== scripts/plot_claim3_detection.py =====
+Detected error classes: 4/4
+Clean-control runs: 24
+Normal exits: 24/24
+ASan reports: 0/12
+Wrote results/figures/claim3_detection_matrix.png
+[PASS] Regenerated: results/figures/claim3_detection_matrix.png
+
+===== scripts/plot_week3_scaling.py =====
+Validated records: 72
+Wrote: results/week3_scaling/analysis/figures/runtime_by_scale.png
+Wrote: results/week3_scaling/analysis/figures/slowdown_by_scale.png
+Wrote: results/week3_scaling/analysis/figures/vmhwm_ratio_by_scale.png
+Wrote: results/week3_scaling/analysis/figures/vmpeak_ratio_by_scale.png
+Wrote: results/week3_scaling/analysis/figures/average_slowdown_by_scale.png
+
+Scale 1 average slowdown: 193.83%
+Scale 2 average slowdown: 177.22%
+Scale 3 average slowdown: 184.71%
+
+STATUS: PASS
+[PASS] Regenerated: results/week3_scaling/analysis/figures/runtime_by_scale.png
+[PASS] Regenerated: results/week3_scaling/analysis/figures/slowdown_by_scale.png
+[PASS] Regenerated: results/week3_scaling/analysis/figures/vmhwm_ratio_by_scale.png
+[PASS] Regenerated: results/week3_scaling/analysis/figures/vmpeak_ratio_by_scale.png
+[PASS] Regenerated: results/week3_scaling/analysis/figures/average_slowdown_by_scale.png
+
+===== results/cross_environment/plot_comparison.py =====
+Validated: ren_scale1
+Validated: ye_session1
+Validated: ye_session2
+Wrote: results/cross_environment/comparison.csv
+
+===== PER-SESSION RESULTS =====
+
+AMD / Clang 21.1.8
+  b1_malloc_text       2.013164x
+  b2_pointer_chase     1.180688x
+  b3_matmul            1.250963x
+  b4_string_scan       1.161510x
+  Unweighted mean: 1.401581x
+
+Intel / Clang 18.1.3 / S1
+  b1_malloc_text       2.050330x
+  b2_pointer_chase     1.184121x
+  b3_matmul            1.254098x
+  b4_string_scan       1.161684x
+  Unweighted mean: 1.412558x
+
+Intel / Clang 18.1.3 / S2
+  b1_malloc_text       2.016030x
+  b2_pointer_chase     1.183670x
+  b3_matmul            1.255704x
+  b4_string_scan       1.161386x
+  Unweighted mean: 1.404198x
+
+===== CROSS-SESSION SPREAD =====
+b1_malloc_text       spread=0.037166x, relative spread=1.846%
+b2_pointer_chase     spread=0.003433x, relative spread=0.291%
+b3_matmul            spread=0.004741x, relative spread=0.379%
+b4_string_scan       spread=0.000298x, relative spread=0.026%
+
+Wrote: results/cross_environment/figures/vmhwm_cross_environment.png
+
+All checks passed.
+Datasets: 3
+Environments: 2
+Benchmark-session ratios: 12
+Underlying measured executions: 72
+[PASS] Regenerated: results/cross_environment/figures/vmhwm_cross_environment.png
+
+Figure regeneration failures: 0

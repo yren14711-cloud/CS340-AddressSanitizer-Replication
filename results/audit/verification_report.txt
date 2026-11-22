@@ -1,0 +1,108 @@
+# ASan reproducibility audit
+Mode: stored-data verification; no new benchmark runs
+
+## Source and script checks
+Source OK: Makefile
+Source OK: scripts/run_experiments.sh
+Source OK: scripts/parse_results.py
+Source OK: scripts/merge_scaling_results.py
+Source OK: scripts/plot_week3_scaling.py
+Source OK: scripts/run_detection.sh
+Source OK: scripts/run_false_positive.sh
+Source OK: scripts/plot_claim3_detection.py
+Source OK: scripts/plot_paper_vs_ours.py
+Source OK: results/memory_claim2/analyze_memory_claim2.py
+Source OK: results/cross_environment/plot_comparison.py
+Source OK: experiments/performance/analyze_benchmarks.py
+Source OK: experiments/performance/plot_performance.py
+[PASS] Required analysis scripts exist and pass syntax checks
+
+## Week 2 runtime checks
+Published overall slowdown: 31.1905%
+[PASS] Week 2 source files and published mean arithmetic
+[WARN] Week 2 per-run means, SDs and checksums require the independent analyzer/raw-log review.
+
+## Week 3 scaling raw-to-CSV checks
+[PASS] results/week3_scaling/combined/combined_results.csv: 72 aggregates match raw data
+Unique measured executions: 72
+Scale 1 b1_malloc_text: slowdown=561.157%, VmHWM=2.013164x
+Scale 1 b2_pointer_chase: slowdown=36.341%, VmHWM=1.180688x
+Scale 1 b3_matmul: slowdown=183.496%, VmHWM=1.250963x
+Scale 1 b4_string_scan: slowdown=-5.670%, VmHWM=1.161510x
+Scale 1 aggregate: slowdown=193.831%, VmHWM=1.401581x
+Scale 2 b1_malloc_text: slowdown=576.509%, VmHWM=1.969763x
+Scale 2 b2_pointer_chase: slowdown=6.775%, VmHWM=1.095868x
+Scale 2 b3_matmul: slowdown=97.915%, VmHWM=1.070425x
+Scale 2 b4_string_scan: slowdown=27.701%, VmHWM=1.145451x
+Scale 2 aggregate: slowdown=177.225%, VmHWM=1.320377x
+Scale 3 b1_malloc_text: slowdown=591.870%, VmHWM=1.984472x
+Scale 3 b2_pointer_chase: slowdown=7.219%, VmHWM=1.068593x
+Scale 3 b3_matmul: slowdown=105.325%, VmHWM=1.032610x
+Scale 3 b4_string_scan: slowdown=34.407%, VmHWM=1.353559x
+Scale 3 aggregate: slowdown=184.705%, VmHWM=1.359809x
+[PASS] Scaling: 72 executions and 72 aggregate records
+
+## Claim 2 memory raw-to-CSV checks
+[PASS] results/memory_claim2/20261121T051205Z/results.csv: 24 aggregates match raw data
+Unique measured executions: 24
+20261121T051205Z b1_malloc_text: 2.050330x
+20261121T051205Z b2_pointer_chase: 1.184121x
+20261121T051205Z b3_matmul: 1.254098x
+20261121T051205Z b4_string_scan: 1.161684x
+20261121T051205Z unweighted mean: 1.412558x
+[PASS] results/memory_claim2/20261121T051259Z/results.csv: 24 aggregates match raw data
+Unique measured executions: 24
+20261121T051259Z b1_malloc_text: 2.016030x
+20261121T051259Z b2_pointer_chase: 1.183670x
+20261121T051259Z b3_matmul: 1.255704x
+20261121T051259Z b4_string_scan: 1.161386x
+20261121T051259Z unweighted mean: 1.404198x
+[PASS] Memory: two sessions and 48 measured executions
+
+## Cross-environment provenance
+ren_scale1: 1.401581x
+ye_session1: 1.412558x
+ye_session2: 1.404198x
+[PASS] Cross-environment: 12 ratios, 72 reused executions
+
+## Claim 3 detection evidence
+[PASS] Clean-control CSV: 24/24 exits, 0/12 ASan reports
+[WARN] Missing clean-control stdout files: 24
+[PASS] 24 stored clean-control exit records
+Stored positive diagnosis: global-buffer-overflow
+Stored positive diagnosis: heap-buffer-overflow
+Stored positive diagnosis: heap-use-after-free
+Stored positive diagnosis: stack-buffer-overflow
+[PASS] All four expected positive diagnostic classes found
+[WARN] Positive-case file-to-exit-code pairing and stdout equivalence require separate record inspection.
+
+## Figure integrity
+results/figures/paper_vs_ours_runtime.png: 1920 x 1200
+results/figures/claim3_detection_matrix.png: 2263 x 1040
+results/cross_environment/figures/vmhwm_cross_environment.png: 2967 x 1730
+results/performance/performance_comparison.png: 2700 x 1650
+results/week3_scaling/analysis/figures/runtime_by_scale.png: 1960 x 1417
+results/week3_scaling/analysis/figures/slowdown_by_scale.png: 1600 x 970
+results/week3_scaling/analysis/figures/vmhwm_ratio_by_scale.png: 1600 x 970
+results/week3_scaling/analysis/figures/vmpeak_ratio_by_scale.png: 1599 x 970
+results/week3_scaling/analysis/figures/average_slowdown_by_scale.png: 1420 x 880
+results/memory_claim2/20261121T051205Z/figures/fig_a_vmhwm_bars.png: 1230 x 690
+results/memory_claim2/20261121T051205Z/figures/fig_b_vmhwm_ratio.png: 1140 x 540
+results/memory_claim2/20261121T051259Z/figures/fig_a_vmhwm_bars.png: 1230 x 690
+results/memory_claim2/20261121T051259Z/figures/fig_b_vmhwm_ratio.png: 1140 x 540
+results/memory_claim2/20261121T051205Z/figures/fig_c_ratio_sessions.png: 1290 x 630
+[PASS] All 14 expected PNG files are readable
+
+## Documentation links
+Local links checked: 121
+Missing local links: 0
+[PASS] All inspected local Markdown links resolve
+
+## Audit summary
+Passed checks: 13
+Warnings: 3
+Failures: 0
+LIMITATION: Week 2 per-run means, SDs and checksums require the independent analyzer/raw-log review.
+LIMITATION: Missing clean-control stdout files: 24
+LIMITATION: Positive-case file-to-exit-code pairing and stdout equivalence require separate record inspection.
+AUDIT STATUS: PASSED WITH DOCUMENTED LIMITATIONS

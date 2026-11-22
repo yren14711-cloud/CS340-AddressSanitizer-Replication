@@ -14,7 +14,7 @@
 
 ## 2. Project Objective
 
-The objective of this project is to reproduce selected experiments from the AddressSanitizer research paper.
+This project is a **Partial Replication and Extension Study** of AddressSanitizer. It evaluates selected claims using open microbenchmarks and extends the evaluation through workload scaling and cross-environment resident-memory comparisons.
 
 AddressSanitizer (ASan) is a memory error detection tool for C and C++ programs. It can detect errors such as buffer overflows and use-after-free.
 
@@ -66,8 +66,8 @@ We plan to investigate how different workload sizes influence the performance ov
 - [x] Experimental environment configured.
 - [x] Memory error detection experiments completed.
 - [x] Performance experiments completed (runtime: `results/performance/`; memory overhead: `results/logs/20261114T155152Z/runs.log`).
-- [ ] Results analyzed and visualized.
-- [ ] Extension experiment completed.
+- [x] Results analyzed and visualized.
+- [x] Workload-scaling and cross-environment analyses completed.
 - [ ] Final report and presentation completed.
 
 ## 7. References
@@ -142,6 +142,8 @@ We evaluated four custom benchmarks at three workload scales (Scale 1, 2, and 3)
 - 2 configurations (Base and ASan)
 - 3 metrics (wall time, VmPeak, VmHWM)
 - 72 aggregated measurement records
+- 72 measured executions (three repetitions per configuration)
+- 24 warm-up executions, excluded from the statistics
 
 ### Analysis and Figures
 
@@ -149,8 +151,8 @@ We evaluated four custom benchmarks at three workload scales (Scale 1, 2, and 3)
 - [Combined Experimental Dataset](results/week3_scaling/combined/combined_results.csv)
 - [Runtime Scaling](results/week3_scaling/analysis/figures/runtime_by_scale.png)
 - [ASan Slowdown](results/week3_scaling/analysis/figures/slowdown_by_scale.png)
-- [VmHWM Overhead](results/week3_scaling/analysis/figures/vmhwm_ratio_by_scale.png)
-- [VmPeak Overhead](results/week3_scaling/analysis/figures/vmpeak_ratio_by_scale.png)
+- [VmHWM Resident-Memory Ratio](results/week3_scaling/analysis/figures/vmhwm_ratio_by_scale.png)
+- [VmPeak Virtual-Address-Space Ratio](results/week3_scaling/analysis/figures/vmpeak_ratio_by_scale.png)
 - [Average Slowdown](results/week3_scaling/analysis/figures/average_slowdown_by_scale.png)
 
 The results show that AddressSanitizer overhead varies substantially across workload types and input sizes.
@@ -174,7 +176,7 @@ them.
 
 Proposed report numbering (final numbering is the report lead's call): Figure 1
 runtime Paper-vs-Ours; Figure 2 Claim 2 memory; Figure 3 Claim 3 detection
-matrix; Figures 4–8 workload scaling. See
+matrix; Figures 4–8 workload scaling; Figure 9 cross-environment VmHWM. See
 [docs/FIGURE_INVENTORY.md](docs/FIGURE_INVENTORY.md).
 
 To regenerate Figure 1 from the committed CSV:
@@ -186,3 +188,94 @@ python3 scripts/plot_paper_vs_ours.py
 matplotlib is required; the script reads
 `results/report/paper_vs_ours_runtime.csv` and writes
 `results/figures/paper_vs_ours_runtime.png`.
+
+
+## 11. Week 4: Integrated Results and Reporting
+
+The final study is a partial replication and extension, not a
+complete numerical reproduction of the original evaluation.
+
+### Cross-environment resident-memory analysis
+
+- Two environments and three separately analyzed sessions.
+- Four benchmarks at Scale 1.
+- Three measured repetitions per configuration.
+- Twelve benchmark-session VmHWM ratios.
+- Seventy-two reused measured executions; no new executions.
+
+See the [cross-environment analysis](results/cross_environment/README.md),
+[comparison dataset](results/cross_environment/comparison.csv)
+and [Figure 9](results/cross_environment/figures/vmhwm_cross_environment.png).
+
+### Detection results
+
+- 4/4 selected buggy cases generated the expected ASan diagnostics.
+- 24/24 clean-control executions exited normally.
+- 0/12 observed ASan false positives.
+
+### Claim verdicts
+
+| Claim | Verdict |
+|---|---|
+| Runtime overhead | Partially supported |
+| Memory overhead | Inconclusive |
+| Detection capability | Supported for the tested cases |
+
+All final report statistics and terminology follow
+[Statistical and Reporting Conventions](docs/STATISTICAL_CONVENTIONS.md).
+
+See also the [claims](docs/CLAIMS.md),
+[deviations](docs/DEVIATIONS.md)
+and [figure inventory](docs/FIGURE_INVENTORY.md).
+
+## 12. Reproducibility and Data Integrity
+
+The Week 4 reproducibility audit traces experiment sources,
+stored raw logs, aggregate statistics, figures and report claims.
+
+- [Reproducibility documentation](docs/REPRODUCIBILITY.md)
+- [Automated audit script](scripts/audit_reproducibility.py)
+- [Recorded audit outputs](results/audit/)
+- [Statistical conventions](docs/STATISTICAL_CONVENTIONS.md)
+
+Run the stored-data audit from the repository root:
+
+    python3 scripts/audit_reproducibility.py
+
+The audit distinguishes verified results from limitations.
+It does not rerun the original benchmarks or overwrite
+historical measurement records.
+
+
+## 13. Final Report Preparation
+
+The Week 4 integration package consolidates the replication
+results, extension studies, statistical conventions and
+reproducibility records.
+
+The report is framed as a Partial Replication and Extension
+Study of AddressSanitizer.
+
+### Report planning documents
+
+- [Final report outline](docs/REPORT_OUTLINE.md)
+- [Individual contributions and writing assignments](docs/CONTRIBUTIONS.md)
+- [Final report submission checklist](docs/FINAL_REPORT_CHECKLIST.md)
+
+### Evidence and reporting documents
+
+- [Claim verdicts](docs/CLAIMS.md)
+- [Paper vs. ours](docs/PAPER_VS_OURS.md)
+- [Replication deviations](docs/DEVIATIONS.md)
+- [Figure inventory](docs/FIGURE_INVENTORY.md)
+- [Statistical conventions](docs/STATISTICAL_CONVENTIONS.md)
+- [Reproducibility documentation](docs/REPRODUCIBILITY.md)
+- [Audit results](results/audit/)
+
+The final report will use these integrated records as its
+experimental evidence base.
+
+Report drafting, member review and course submission
+are tracked separately from experiment integration.
+
+See the [final report key results](results/report/final_report_key_results.md) for a numerical evidence summary.

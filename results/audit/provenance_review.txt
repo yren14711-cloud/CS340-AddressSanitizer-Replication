@@ -1,0 +1,132 @@
+===== GIT IGNORE RULES =====
+# Compiled programs and build files
+build/
+*.o
+*.out
+*.exe
+*.a
+*.so
+
+# Python temporary files
+__pycache__/
+*.pyc
+
+# Editor and operating system files
+.vscode/
+.DS_Store
+
+# Keep experiment source code and result logs
+
+===== TRACKED DETECTION RECORDS =====
+results/detect/environment.txt
+results/detect/false_positive/b1_malloc_text_asan_run1.err
+results/detect/false_positive/b1_malloc_text_asan_run1.exit
+results/detect/false_positive/b1_malloc_text_asan_run2.err
+results/detect/false_positive/b1_malloc_text_asan_run2.exit
+results/detect/false_positive/b1_malloc_text_asan_run3.err
+results/detect/false_positive/b1_malloc_text_asan_run3.exit
+results/detect/false_positive/b1_malloc_text_base_run1.err
+results/detect/false_positive/b1_malloc_text_base_run1.exit
+results/detect/false_positive/b1_malloc_text_base_run2.err
+results/detect/false_positive/b1_malloc_text_base_run2.exit
+results/detect/false_positive/b1_malloc_text_base_run3.err
+results/detect/false_positive/b1_malloc_text_base_run3.exit
+results/detect/false_positive/b2_pointer_chase_asan_run1.err
+results/detect/false_positive/b2_pointer_chase_asan_run1.exit
+results/detect/false_positive/b2_pointer_chase_asan_run2.err
+results/detect/false_positive/b2_pointer_chase_asan_run2.exit
+results/detect/false_positive/b2_pointer_chase_asan_run3.err
+results/detect/false_positive/b2_pointer_chase_asan_run3.exit
+results/detect/false_positive/b2_pointer_chase_base_run1.err
+results/detect/false_positive/b2_pointer_chase_base_run1.exit
+results/detect/false_positive/b2_pointer_chase_base_run2.err
+results/detect/false_positive/b2_pointer_chase_base_run2.exit
+results/detect/false_positive/b2_pointer_chase_base_run3.err
+results/detect/false_positive/b2_pointer_chase_base_run3.exit
+results/detect/false_positive/b3_matmul_asan_run1.err
+results/detect/false_positive/b3_matmul_asan_run1.exit
+results/detect/false_positive/b3_matmul_asan_run2.err
+results/detect/false_positive/b3_matmul_asan_run2.exit
+results/detect/false_positive/b3_matmul_asan_run3.err
+results/detect/false_positive/b3_matmul_asan_run3.exit
+results/detect/false_positive/b3_matmul_base_run1.err
+results/detect/false_positive/b3_matmul_base_run1.exit
+results/detect/false_positive/b3_matmul_base_run2.err
+results/detect/false_positive/b3_matmul_base_run2.exit
+results/detect/false_positive/b3_matmul_base_run3.err
+results/detect/false_positive/b3_matmul_base_run3.exit
+results/detect/false_positive/b4_string_scan_asan_run1.err
+results/detect/false_positive/b4_string_scan_asan_run1.exit
+results/detect/false_positive/b4_string_scan_asan_run2.err
+results/detect/false_positive/b4_string_scan_asan_run2.exit
+results/detect/false_positive/b4_string_scan_asan_run3.err
+results/detect/false_positive/b4_string_scan_asan_run3.exit
+results/detect/false_positive/b4_string_scan_base_run1.err
+results/detect/false_positive/b4_string_scan_base_run1.exit
+results/detect/false_positive/b4_string_scan_base_run2.err
+results/detect/false_positive/b4_string_scan_base_run2.exit
+results/detect/false_positive/b4_string_scan_base_run3.err
+results/detect/false_positive/b4_string_scan_base_run3.exit
+results/detect/false_positive/environment.txt
+results/detect/false_positive/summary.csv
+results/detect/global_buffer_overflow_asan.log
+results/detect/global_buffer_overflow_asan_build.log
+results/detect/global_buffer_overflow_plain.log
+results/detect/global_buffer_overflow_plain_build.log
+results/detect/heap_buffer_overflow_asan.log
+results/detect/heap_buffer_overflow_asan_build.log
+results/detect/heap_buffer_overflow_plain.log
+results/detect/heap_buffer_overflow_plain_build.log
+results/detect/stack_buffer_overflow_asan.log
+results/detect/stack_buffer_overflow_asan_build.log
+results/detect/stack_buffer_overflow_plain.log
+results/detect/stack_buffer_overflow_plain_build.log
+results/detect/summary.md
+results/detect/use_after_free_asan.log
+results/detect/use_after_free_asan_build.log
+results/detect/use_after_free_plain.log
+results/detect/use_after_free_plain_build.log
+
+===== IGNORED DETECTION FILES =====
+
+===== TRACKED WEEK 2 LOGS =====
+results/performance/benchmark_runs_batch1.log
+results/performance/benchmark_runs_batch2.log
+results/performance/benchmark_runs_batch3.log
+results/performance/benchmark_summary.csv
+results/performance/performance_analysis.txt
+results/performance/performance_comparison.png
+
+===== TRACKED ENVIRONMENT RECORDS =====
+results/asan/environment.txt
+results/cross_environment/README.md
+results/cross_environment/comparison.csv
+results/cross_environment/figures/vmhwm_cross_environment.png
+results/cross_environment/plot_comparison.py
+results/detect/environment.txt
+results/detect/false_positive/environment.txt
+results/env/environment.txt
+results/env/environment_b1-b4_20261114T155323Z.txt
+results/env/environment_replication_20261114T161554Z.txt
+results/memory_claim2/20261121T051205Z/environment.txt
+results/memory_claim2/20261121T051259Z/environment.txt
+
+===== HISTORICAL STASH =====
+stash@{0}: On week3/renyi-an: Backup Week 3 local changes before Week 4 integration
+
+===== HISTORICAL HARNESS DIFFERENCE =====
+diff --git a/scripts/run_experiments.sh b/scripts/run_experiments.sh
+index 6e77f96..5c60fec 100755
+--- a/scripts/run_experiments.sh
++++ b/scripts/run_experiments.sh
+@@ -126,8 +126,8 @@ measure() {
+                 VmPeak:) vmpeak=$val ;;
+                 VmHWM:)  vmhwm=$val ;;
+             esac
+-        done <"/proc/$pid/status" 2>/dev/null
+-        read -r line <"/proc/$pid/stat" 2>/dev/null || break
++        done 2>/dev/null <"/proc/$pid/status"
++        read -r line 2>/dev/null <"/proc/$pid/stat" || break
+         rest=${line##*) }
+         state=${rest%% *}
+         if [ "$state" = "Z" ]; then

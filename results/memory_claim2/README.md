@@ -168,3 +168,21 @@ if it is missing the script still writes the CSV and `summary.md` and says so.
 - `results/summary/summary.md` and `results/summary_replication_20261114T161554Z/`
   are the 14 November parses and are left untouched; their `mem ratio` column is
   the unusable VmPeak ratio and is **not** the Claim 2 figure.
+
+## Week 4 reporting clarification
+
+The reported VmHWM ratios and the paper's 3.37x VmPeak ratio
+measure different quantities on different workloads.
+The numerical difference must not be interpreted as evidence
+that modern ASan has lower memory overhead than the original ASan.
+
+The approximately 20 TB reservation described above is more
+precisely expressed as approximately 20 TiB of virtual address
+space, not physical RAM.
+
+Unusually long wall-time observations remain in the dataset.
+Host scheduling or virtualization may contribute, but the
+causes of these observations and their effects on memory
+measurements have not been independently established.
+
+See [Statistical and Reporting Conventions](../../docs/STATISTICAL_CONVENTIONS.md).

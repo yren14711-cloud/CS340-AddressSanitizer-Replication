@@ -86,3 +86,13 @@ Wall-time outliers (host stall, kept in the data, do not affect VmHWM):
 
 CSV: `results/memory_claim2/20261121T051259Z/results.csv` (24 rows).
 
+## Week 4 reporting clarification
+
+The numerical VmHWM measurements are retained unchanged.
+The paper's 3.37x VmPeak result is not directly comparable.
+
+The virtual reservation is approximately 20 TiB.
+The cause of wall-time outliers has not been established;
+all measured observations are retained.
+
+See [Statistical and Reporting Conventions](../../../docs/STATISTICAL_CONVENTIONS.md).

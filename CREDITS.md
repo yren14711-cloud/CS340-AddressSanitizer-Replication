@@ -45,3 +45,18 @@ LICENSE**. The full text is in the `LICENSE` file at the repository root.
 Third-party components keep their own LICENSE: Clang and compiler-rt are
 Apache-2.0 WITH LLVM-exception, and they are used as an installed toolchain
 rather than copied into this repository.
+
+
+## Detailed Contribution Record
+
+The Week 4 integration package includes a consolidated
+description of individual experimental and integration
+contributions:
+
+- [Group contributions](docs/CONTRIBUTIONS.md)
+- [Final report outline](docs/REPORT_OUTLINE.md)
+
+The existing contribution records above are retained.
+
+The proposed writing assignments remain subject to
+group review and do not imply completed report authorship.

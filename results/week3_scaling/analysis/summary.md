@@ -124,3 +124,15 @@ The results support the qualitative claim that ASan overhead is workload-depende
 Serebryany, K., Bruening, D., Potapenko, A., and Vyukov, D. (2012). *AddressSanitizer: A Fast Address Sanity Checker.* USENIX Annual Technical Conference.
 
 https://www.usenix.org/system/files/conference/atc12/atc12-final39.pdf
+
+## Week 4 reporting clarification
+
+The 72 aggregate metric records are distinct from the
+72 measured executions. Warm-ups are excluded.
+
+The reported overhead averages use equal benchmark weights.
+
+The approximately 21.47 billion Linux-reported kB of ASan
+virtual address space corresponds to approximately 20 TiB.
+
+See [Statistical and Reporting Conventions](../../../docs/STATISTICAL_CONVENTIONS.md).

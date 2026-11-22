@@ -31,6 +31,9 @@ not identify the error.
 | clean | b4_string_scan | base/asan | 3/3 | 0/0 | 0/3 false positive |
 
 ```text
-Buggy caught (exit 1): [########--] 4/4
-False positives (b1-b4): [----------] 0/24 (exit 0: 24/24)
+Buggy caught (exit 1): [##########] 4/4
+Clean executions successful: [##########] 24/24
+Observed ASan false positives: [----------] 0/12
 ```
+
+Report figure: [Claim 3 detection matrix](../figures/claim3_detection_matrix.png).
