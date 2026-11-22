@@ -1,0 +1,8 @@
+[VISUAL REVIEW REQUIRED] results/figures/paper_vs_ours_runtime.png
+[BYTE IDENTICAL] results/figures/claim3_detection_matrix.png
+[BYTE IDENTICAL] results/cross_environment/figures/vmhwm_cross_environment.png
+[BYTE IDENTICAL] results/week3_scaling/analysis/figures/runtime_by_scale.png
+[BYTE IDENTICAL] results/week3_scaling/analysis/figures/slowdown_by_scale.png
+[BYTE IDENTICAL] results/week3_scaling/analysis/figures/vmhwm_ratio_by_scale.png
+[BYTE IDENTICAL] results/week3_scaling/analysis/figures/vmpeak_ratio_by_scale.png
+[BYTE IDENTICAL] results/week3_scaling/analysis/figures/average_slowdown_by_scale.png

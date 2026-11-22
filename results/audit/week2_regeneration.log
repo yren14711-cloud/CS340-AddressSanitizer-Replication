@@ -1,0 +1,6 @@
+Analysis completed successfully.
+CSV saved: results/performance/benchmark_summary.csv
+Report saved: results/performance/performance_analysis.txt
+Total records: 30
+Unique checksums: 1
+Overall overhead: 31.19%

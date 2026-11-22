@@ -227,3 +227,21 @@ All final report statistics and terminology follow
 See also the [claims](docs/CLAIMS.md),
 [deviations](docs/DEVIATIONS.md)
 and [figure inventory](docs/FIGURE_INVENTORY.md).
+
+## 12. Reproducibility and Data Integrity
+
+The Week 4 reproducibility audit traces experiment sources,
+stored raw logs, aggregate statistics, figures and report claims.
+
+- [Reproducibility documentation](docs/REPRODUCIBILITY.md)
+- [Automated audit script](scripts/audit_reproducibility.py)
+- [Recorded audit outputs](results/audit/)
+- [Statistical conventions](docs/STATISTICAL_CONVENTIONS.md)
+
+Run the stored-data audit from the repository root:
+
+    python3 scripts/audit_reproducibility.py
+
+The audit distinguishes verified results from limitations.
+It does not rerun the original benchmarks or overwrite
+historical measurement records.
