@@ -19,6 +19,7 @@ the numbering changes, update this file, not the underlying figures.
 - Figure 2 — memory overhead (Claim 2)
 - Figure 3 — detection matrix (Claim 3)
 - Figures 4–8 — workload scaling (extension)
+- Figure 9 — cross-environment resident-memory comparison (extension)
 
 ## 1. Main report figures
 
@@ -32,6 +33,7 @@ the numbering changes, update this file, not the underlying figures.
 | 6 | delivered | ASan resident-memory ratio (VmHWM) by scale | Claim 2 (extension) | [`results/week3_scaling/analysis/figures/vmhwm_ratio_by_scale.png`](../results/week3_scaling/analysis/figures/vmhwm_ratio_by_scale.png) | Same as Figure 4 | 任奕安 (1240014055) | VmHWM is a resident-memory proxy; it cannot be compared column-for-column with the paper's VmPeak 3.37x. Ratios are 1.32–1.40x unweighted across the four benchmarks. `summary.md` calls this "Figure 3". |
 | 7 | delivered | ASan virtual-memory ratio (VmPeak) by scale — **not physical memory** | Claim 2 (extension, caveat) | [`results/week3_scaling/analysis/figures/vmpeak_ratio_by_scale.png`](../results/week3_scaling/analysis/figures/vmpeak_ratio_by_scale.png) | Same as Figure 4 | 任奕安 (1240014055) | ASan VmPeak is ~21.47 billion kB (~20 TB) because the runtime reserves shadow address space; the figure displays that reservation, not RAM use. It must not be read as a physical-memory increase, and VmPeak/VmHWM ratios must not be mixed. `summary.md` calls this "Figure 4". |
 | 8 | delivered | Unweighted average ASan runtime slowdown by scale | Claim 1 (extension) | [`results/week3_scaling/analysis/figures/average_slowdown_by_scale.png`](../results/week3_scaling/analysis/figures/average_slowdown_by_scale.png) | Same as Figure 4 | 任奕安 (1240014055) | The average is an **unweighted mean over four microbenchmarks**, dominated by the allocation-heavy b1; it is not a SPEC CPU2006 average and does not reproduce the paper's 73%. No monotonic trend (193.8 / 177.2 / 184.7%). `summary.md` calls this "Figure 5". |
+| 9 | delivered | Cross-environment ASan resident-memory overhead at Scale 1 | Claim 2 (extension) | [`vmhwm_cross_environment.png`](../results/cross_environment/figures/vmhwm_cross_environment.png) | [`comparison.csv`](../results/cross_environment/comparison.csv); [analysis and source records](../results/cross_environment/README.md) | 任奕安 (analysis and integration); 葉景威 (memory experiments) | Two environments, three separately analyzed sessions, four benchmarks, three repetitions per configuration. Ratios of mean VmHWM values; no error bars. Descriptive consistency only, not formal statistical equivalence. Not directly comparable to the paper's VmPeak ratio of 3.37x. |
 
 ## 2. Supplementary figures (appendix; no report number)
 
@@ -53,13 +55,14 @@ the numbering changes, update this file, not the underlying figures.
 | T5 | delivered | Claim wording, verdicts, per-claim notes | [`docs/CLAIMS.md`](CLAIMS.md) | group |
 | T6 | delivered | Quantified deviations from the paper's setup (benchmark, CPU, compiler, ASan options, hosts) | [`docs/DEVIATIONS.md`](DEVIATIONS.md) | group |
 | T7 | delivered | Clean-control raw result index: four benchmarks, two build variants, three runs per variant | [`results/detect/false_positive/summary.csv`](../results/detect/false_positive/summary.csv) | 王乐樵 (5260001105) |
+| T8 | delivered | Cross-environment VmHWM comparison: 12 benchmark-session ratios with means, SDs, sample sizes and source paths | [`comparison.csv`](../results/cross_environment/comparison.csv) | 任奕安; 葉景威 |
 
 ## 4. Remaining editorial tasks and delivery status
 
 | Item | Expected from | Why it is pending | What not to do |
 |---|---|---|---|
 | Claim 3 detection and clean-control evidence | 王乐樵; 任奕安 | Delivered: experiments in PR #4; Figure 3 generated during Week 4 integration. | Do not generalize the observed results to all programs. |
-| Final figure numbering, cross-references and caption sign-off | report lead | Figures 1–8 above are a proposal; the report lead unifies numbering when assembling the report. | Do not renumber the underlying files; update this inventory and the references instead. |
+| Final figure numbering, cross-references and caption sign-off | report lead | Figures 1–9 above are a proposal; the report lead unifies numbering when assembling the report. | Do not renumber the underlying files; update this inventory and the references instead. |
 | Claim 2 status change | — (record only) | The Week 3 task brief expected Claims 2 and 3 to be pending. Claim 2 was delivered on 2026-11-21 in PR #2 (`a8e8cf1`, `86c979c`) and is already on `main`; only editorial selection remains (proposal: `fig_a` = Figure 2, `fig_b`/`fig_c` = appendix). | Do not list Claim 2 numbers as pending, and do not present 1.41x as a reproduction of 3.37x. |
 
 ## 5. Rules for changing this inventory
@@ -86,6 +89,7 @@ the numbering changes, update this file, not the underlying figures.
 | Figure 3 | `scripts/plot_claim3_detection.py` | Detection summary and clean-control summary.csv |
 | Figures 4-8 | `scripts/plot_week3_scaling.py` | `results/week3_scaling/combined/combined_results.csv` |
 | S4 | `experiments/performance/plot_performance.py` | Week 2 performance experiment data |
+| Figure 9 | `results/cross_environment/plot_comparison.py` | Scale 1 aggregate CSV and both Claim 2 session CSVs, validated against historical raw logs |
 
 The generators must be checked against their actual command-line
 interfaces before regeneration. Do not overwrite historical raw
@@ -100,4 +104,3 @@ The clean-control CSV contains 24 runs in total: 12 Base runs and
 12 ASan runs. All 24 exited normally; the ASan-report denominator
 is 12, not 24. Identical stdout between variants is a separate
 validation requirement and is not established by the CSV alone.
-

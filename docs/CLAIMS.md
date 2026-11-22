@@ -111,3 +111,39 @@ Paper: *AddressSanitizer: A Fast Address Sanity Checker*, USENIX ATC 2012.
 | 3 detection | qualitative | 4/4 error cases correctly detected; 24/24 clean-control executions successful; 0/12 observed ASan false positives | supported | Supported for the tested cases only; not a proof of universal detection completeness or zero false positives. See `results/detect/summary.md` and `results/detect/false_positive/summary.csv`. |
 
 Allowed verdicts: supported / partially supported / not supported / inconclusive.
+
+## Week 4 extension: cross-environment VmHWM consistency
+
+The Scale 1 workload-scaling results and the two Claim 2
+memory sessions were compared across two hardware and
+compiler environments.
+
+The unweighted mean VmHWM ratios over the four benchmarks
+were:
+
+- AMD / Clang 21.1.8: 1.4016x.
+- Intel / Clang 18.1.3, session 1: 1.4126x.
+- Intel / Clang 18.1.3, session 2: 1.4042x.
+
+The analysis contains 12 benchmark-session ratios derived
+from 72 historical measured executions. Sessions are not
+pooled.
+
+The allocation-intensive b1 benchmark consistently has the
+highest resident-memory ratio in these sessions.
+
+These observations provide limited descriptive evidence
+of cross-environment consistency and workload dependence,
+not formal statistical equivalence or a universal memory
+overhead estimate.
+
+**Claim 2 verdict remains inconclusive** as a direct
+replication of the paper's reported 3.37x VmPeak result:
+our measurements use VmHWM and different benchmarks.
+
+Evidence and reproduction instructions:
+
+- [Cross-environment analysis](../results/cross_environment/README.md)
+- [Comparison CSV](../results/cross_environment/comparison.csv)
+- [Figure 9](../results/cross_environment/figures/vmhwm_cross_environment.png)
+- [Analysis script](../results/cross_environment/plot_comparison.py)
