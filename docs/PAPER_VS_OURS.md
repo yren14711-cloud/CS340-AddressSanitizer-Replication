@@ -113,14 +113,49 @@ by side only to state the deviation. See
 
 ## 3. Detection (Claim 3)
 
-Claim 3 is qualitative ("detects … without false positives"), so there is no
-Paper-vs-Ours ratio to plot. Four positive cases (heap-, stack-,
-global-buffer-overflow, heap-use-after-free) are reported in
-[`results/detect/summary.md`](../results/detect/summary.md); the clean-program
-false-positive evidence and the report matrix figure are still pending (owner:
-王乐樵). The report must keep the verdict at "partially supported" until that
-evidence exists. See [`docs/FIGURE_INVENTORY.md`](FIGURE_INVENTORY.md) for the
-pending status.
+Claim 3 is qualitative, so there is no Paper-vs-Ours
+numerical ratio to plot.
+
+| Test case | Plain exit | ASan exit | ASan reported class | Match |
+|---|---:|---:|---|---|
+| Heap buffer overflow | 0 | 1 | heap-buffer-overflow | Yes |
+| Stack buffer overflow | 0 | 1 | stack-buffer-overflow | Yes |
+| Global buffer overflow | 0 | 1 | global-buffer-overflow | Yes |
+| Heap use-after-free | 0 | 1 | heap-use-after-free | Yes |
+
+All four intentionally constructed error cases were correctly
+detected and classified by ASan.
+
+The clean-control experiment used four benchmarks (b1-b4),
+two configurations (Base and ASan), and three repetitions
+per configuration.
+
+| Benchmark | Base successful | ASan successful | Observed ASan false positives |
+|---|---:|---:|---:|
+| b1_malloc_text | 3/3 | 3/3 | 0/3 |
+| b2_pointer_chase | 3/3 | 3/3 | 0/3 |
+| b3_matmul | 3/3 | 3/3 | 0/3 |
+| b4_string_scan | 3/3 | 3/3 | 0/3 |
+| Total | 12/12 | 12/12 | 0/12 |
+
+All 24 clean-control executions exited successfully.
+No ASan reports were observed in the 12 ASan-enabled runs.
+
+**Verdict: supported for the tested cases.**
+
+The results support the paper's qualitative detection claim
+within the tested scope. They do not establish universal
+detection completeness or the absence of false positives
+in arbitrary programs. The paper's Chromium bug-finding
+experiment was not reproduced.
+
+Evidence:
+
+- [`results/detect/summary.md`](../results/detect/summary.md)
+- [`results/detect/false_positive/summary.csv`](../results/detect/false_positive/summary.csv)
+
+See [`docs/FIGURE_INVENTORY.md`](FIGURE_INVENTORY.md) for the
+report matrix presentation status.
 
 ## 4. Workload scaling extension
 
@@ -140,8 +175,9 @@ be read as a virtual-address-space reservation (~20 TB), never as physical RAM.
   used interchangeably.
 - Any standard deviation for the paper's 73%, or an error bar on Figure 1 invented
   to fill the gap.
-- A "no false positives" verdict for Claim 3 before the clean-program check is
-  committed.
+- That ASan never produces false positives or detects every memory error.
+  Our evidence is limited to four positive cases and 12 ASan-enabled
+  clean-control executions.
 
 ## 6. Regenerate Figure 1
 
@@ -168,3 +204,5 @@ rerunning is the only way to change the figure. matplotlib is required.
 | [`results/memory_claim2/20261121T051205Z/summary.md`](../results/memory_claim2/20261121T051205Z/summary.md) | Claim 2 Table A/B and per-run VmHWM values | Memory comparison |
 | [`docs/CLAIMS.md`](CLAIMS.md), [`docs/DEVIATIONS.md`](DEVIATIONS.md) | Claim wording, verdicts, quantified deviations | Report text |
 | [`docs/FIGURE_INVENTORY.md`](FIGURE_INVENTORY.md) | All figures/tables, owners, pending status | Report assembly |
+| [`results/detect/summary.md`](../results/detect/summary.md) | Four positive detection cases and clean-control overview | Claim 3 detection results |
+| [`results/detect/false_positive/summary.csv`](../results/detect/false_positive/summary.csv) | 24 clean-control execution records | Claim 3 false-positive check |
