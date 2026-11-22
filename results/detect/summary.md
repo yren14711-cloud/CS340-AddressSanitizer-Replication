@@ -35,3 +35,5 @@ Buggy caught (exit 1): [##########] 4/4
 Clean executions successful: [##########] 24/24
 Observed ASan false positives: [----------] 0/12
 ```
+
+Report figure: [Claim 3 detection matrix](../figures/claim3_detection_matrix.png).

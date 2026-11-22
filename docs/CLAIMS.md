@@ -95,6 +95,7 @@ Paper: *AddressSanitizer: A Fast Address Sanity Checker*, USENIX ATC 2012.
   false positives in arbitrary programs.
 - Evidence: `results/detect/summary.md` and
   `results/detect/false_positive/summary.csv`.
+- Report figure: [Claim 3 detection matrix](../results/figures/claim3_detection_matrix.png).
 - Produced by: `scripts/run_detection.sh` (covers all four cases). Clean controls are produced by
   `scripts/run_false_positive.sh`. Note that
   `make detect` currently builds only the heap case from `DETECT_SRC`.
